@@ -23,7 +23,15 @@ As this project has a composer.json and composer.lock file, you can install vend
     composer install
 
 ------------------------------------
-**3) Once vendors installation finish**
+**3) Create schema in database**
+
+To create schema go to project folder and run the following command
+
+    php app/cache doctrine:schema:create
+
+
+------------------------------------
+**4) Once vendors installation finish and schema has been created**
 
 Just miss to give permission to certain folders
 
