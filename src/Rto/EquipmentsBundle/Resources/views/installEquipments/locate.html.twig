@@ -1,0 +1,58 @@
+{% extends "RtoCoreBundle:layout:index.html.twig" %}
+
+{% block  title %}
+Locate Equipments
+{% endblock %}
+
+{% block vars %}
+<script type="text/javascript">
+	var addressLoadDetails 					 = '{{path('Equipments_loadDetails')}}';
+	var addressSearchLocationTypeEquipments = '{{path('Equipments_searchLocationTypeEquipments')}}';
+	var map       		   					 = mapOptions = marker = '';
+	var markers			   					 = [];
+	var locations 		   					 = new Array();
+</script>
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block js %}
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeHUWKV3OnrYvvUs1NvtmzTApQB3cVQsY&callback=initialize" async defer></script>
+<script type="text/javascript">
+	locations = [{% for element in data %}{% if loop.index == 1 %}['{{element["locationName"]}} - {{element["projectName"]}}','{{element["latitude"]}}','{{element["length"]}}','{{element["count"]}}','{{element["locationId"]}}']{% else %},['{{element["locationName"]}} - {{element["projectName"]}}','{{element["latitude"]}}','{{element["length"]}}','{{element["count"]}}','{{element["locationId"]}}']{% endif %}{% endfor %}];
+</script>
+<script type="text/javascript" src="{{asset('bundles/rtoequipments/js/installEquipments/locate.js')}}"></script>
+{% endblock %}
+
+{% block  content %}
+<div>
+Locate Equipments
+</div>
+<div>
+	<p>
+		<label for="typeEquipment">Type of Equipments:</label>
+			<select name="type" id="type">
+				<option value="0">All..</option>
+				{% for element in types %}
+				<option value="{{element.type.id}}">{{element.type.name}}</option>
+				{% endfor %}
+			</select>
+			<span class="loader" id="loader-select"></span>
+	</p>
+</div>
+<div class="clear"></div>
+<div id="map-canvas-locate"></div>
+{% endblock %}
+
+{% block widget %}
+<section>
+	<div>
+		Information <span class="loader" id="loader-information"></span>
+	</div>
+	<ul >
+	<li class="title">No point selected</li>
+	<li class="content"></li>
+	</ul>
+</section>
+{% endblock %}

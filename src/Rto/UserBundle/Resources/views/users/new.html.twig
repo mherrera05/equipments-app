@@ -1,0 +1,72 @@
+{% extends "RtoCoreBundle:layout:index.html.twig" %}
+
+{% block  title %}
+Users
+{% endblock %}
+
+{% block vars %}
+<script type="text/javascript">
+	var addressCreateUser      = '{{path('User_createUser')}}';
+	var addressSearchEmail     = '{{path('User_searchEmail')}}';
+	var addressSearchUserId    = '{{path('User_searchUserId')}}';
+	var condition			   = false;
+</script>
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{{asset('bundles/rtouser/js/users/new.min.js')}}"></script>
+{% endblock %}
+
+{% block  content %}
+<div>
+	Users
+</div>
+<form method="POST" name="form" id="form" onsubmit="return false;">
+	<p>
+		<label for="name">Name: </label>
+		<input type="text" name="name" id="name" required >
+	</p>
+	<p>
+		<label for="lastname">Last Name: </label>
+		<input type="text" name="lastname" id="last-name" required >
+	</p>
+	<p>
+		<label for="userid">User ID: </label>
+		<input type="text" name="userid" id="user-id" required >
+	</p>
+	<p>
+		<label for="email">E-mail: </label>
+		<input type="email" name="email" id="email" required >
+	</p>
+	<p>
+		<label for="password">Provicional Password: </label>
+		<input type="password" name="password" id="password" required >
+	</p>
+	<p>
+		<label for="role">Role: </label>
+		<select name="role" id="role">
+			<option> Choose..</option>
+			<option value="ROLE_OPERATOR">Operator</option>
+			<option value="ROLE_COORD">Coordinator / Manager</option>
+			<option value="ROLE_ADMIN">Administrator</option>
+		</select>
+	</p>
+	<p>
+		<label for="state">State: </label>
+		<select name="state" id="state">
+			<option> Choose..</option>
+			<option value="1">Enable Account</option>
+			<option value="0">Disabled Account</option>
+		</select>
+	</p>
+	<p>
+		<span class="loader" id="loader-login"></span>
+		<button type="submit">
+			Save
+		</button>
+	</p>
+</form>
+{% endblock %}

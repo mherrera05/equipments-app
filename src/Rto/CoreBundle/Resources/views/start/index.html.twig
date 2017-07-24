@@ -1,0 +1,74 @@
+{% extends "RtoCoreBundle:layout:index.html.twig" %}
+
+{% block title %}
+Last Activities
+{% endblock %}
+
+{% block vars %}
+<script type="text/javascript" >
+ var addressLogScroll = '{{path('Logs_Scroll')}}';
+ var images           = '{{asset('')}}';
+ var data   = [{% for row in participations %}{% if loop.index == 1 %}['{{row[0]}}','{{row[1]}}']{% else %},['{{row[0]}}','{{row[1]}}']{% endif%}{% endfor%}];
+ </script>
+{% endblock%}
+
+{% block content %}
+<div>
+	Last Activities
+</div>
+<ul id="scroll" start="{{start}}">
+	{% for row in data|slice(0, 20) %}
+	<li>
+		<div>
+			<img class="log-picture" src="{{asset(row.image)}}?{{ "now"|date("m/d/Y") }}">
+		</div>
+		<div>
+			{% if row.log.link != '' %}
+			<p>
+				<a href='{{row.log.link}}'>{{row.log.title}}</a>
+			</p>
+			<p>
+				{{row.log.description}}, <span>event added {{row.timeEvent}} ago </span>
+			</p>
+			{% else %}
+			<p>
+				{{row.log.title}}
+			</p>
+			<p>
+				{{row.log.description}}, <span>event added {{row.timeEvent }} ago </span>
+			</p>
+			{% endif %}
+			{% if row.comment != '' %}
+			<div class="comments" >
+				<img src="{{asset(row.comment.image)}}?{{ "now"|date("m/d/Y") }}"><p><span>{{row.comment.name}}</span> {{row.comment.comment}}</p>
+				
+			</div>
+			{% endif %}
+		</div>
+		
+	</li>
+	{% endfor %}
+</ul>
+{% endblock %}
+
+{% block widget %}
+<section>
+	<div>Information
+	</div>
+	{% render (controller('RtoCoreBundle:Core:widget')) %}
+	{% render (controller('RtoCoreBundle:Core:widget2')) %}
+</section>
+	
+{% endblock %}
+
+{% block help %}
+    {% render (controller('RtoCoreBundle:Core:help')) %}
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{{asset('bundles/rtoreports/js/jquery.jqplot.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/rtoreports/js/plugins/jqplot.barRenderer.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/rtoreports/js/plugins/jqplot.categoryAxisRenderer.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/rtoreports/js/plugins/jqplot.pointLabels.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/rtocore/js/start.js')}}"></script>
+{% endblock %}

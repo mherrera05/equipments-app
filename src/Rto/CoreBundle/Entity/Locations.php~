@@ -1,0 +1,80 @@
+<?php
+
+namespace Rto\CoreBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Locations
+ *
+ * @ORM\Table(name="locations", uniqueConstraints={@ORM\UniqueConstraint(name="id_UNIQUE", columns={"id"})}, indexes={@ORM\Index(name="fk_locations_projects1_idx", columns={"projects_id"}), @ORM\Index(name="fk_locations_type_locations1_idx", columns={"type_locations_id"})})
+ * @ORM\Entity
+ */
+class Locations
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=80, nullable=false)
+     */
+    private $name;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="latitude", type="float", precision=10, scale=0, nullable=true)
+     */
+    private $latitude;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="length", type="float", precision=10, scale=0, nullable=true)
+     */
+    private $length;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="gather", type="boolean", nullable=false)
+     */
+    private $gather;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="workplace", type="boolean", nullable=false)
+     */
+    private $workplace;
+
+    /**
+     * @var \Projects
+     *
+     * @ORM\ManyToOne(targetEntity="Projects")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="projects_id", referencedColumnName="id")
+     * })
+     */
+    private $projects;
+
+    /**
+     * @var \TypeLocations
+     *
+     * @ORM\ManyToOne(targetEntity="TypeLocations")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="type_locations_id", referencedColumnName="id")
+     * })
+     */
+    private $typeLocations;
+
+
+}

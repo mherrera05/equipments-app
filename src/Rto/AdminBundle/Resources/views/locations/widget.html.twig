@@ -1,0 +1,6 @@
+<ul >
+	<li class="title">Locations Registered</li>
+	<li class="content">{{count}} location{% if data > 0 %}s{% endif %} registered</li>
+	<li class="title">Last Location Registered</li>
+	<li class="content">{% if count > 0 %}{{data[count-1].location.name}}{% endif %} </li>
+</ul>

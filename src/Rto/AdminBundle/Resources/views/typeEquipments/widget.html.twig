@@ -1,0 +1,6 @@
+<ul >
+	<li class="title">Type of Equipments Registered</li>
+	<li class="content">{{count}} equipment{% if data > 0 %}s{% endif %} registered</li>
+	<li class="title">Last Type of Equipments Registered</li>
+	<li class="content">{% if count > 0 %}{{data[count-1].type.name}} {% endif %} </li>
+</ul>

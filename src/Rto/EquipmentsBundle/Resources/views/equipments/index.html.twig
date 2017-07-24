@@ -1,0 +1,57 @@
+{% extends "RtoCoreBundle:layout:index.html.twig" %}
+
+{% block  title %}
+Equipments
+{% endblock %}
+
+{% block css %}
+<link href="{{asset('bundles/rtocore/js/jquery-datatable/media/css/jquery.dataTables.min.css')}}" type="text/css" rel="stylesheet">
+<link href="{{asset('bundles/rtocore/js/jquery-datatable/extensions/TableTools/css/dataTables.tableTools.min.css')}}" type="text/css" rel="stylesheet">
+{% endblock %}
+
+{% block vars %}
+<script type="text/javascript">
+	var addressDeleteEquipment = '{{path('Equipments_deleteEquipment')}}';
+</script>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{{asset('bundles/rtocore/js/jquery-datatable/media/js/jquery.dataTables.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/rtocore/js/jquery-datatable/extensions/TableTools/js/dataTables.tableTools.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/rtoequipments/js/equipments/index.min.js')}}"></script>
+{% endblock %}
+
+{% block expand %}
+content-max-size
+{% endblock %}
+
+{% block  content %}
+<div>
+	Equipments
+</div>
+<p>
+	<button type="button" class="new-button" route="{{url}}">New Equipment</button>
+</p>
+<div class="clear"></div>
+	<table id="equipments">
+		<thead>
+			<tr>
+				<td style="width: 10%">Brand</td><td>Model</td><td>Type</td><td>Serial</td><td>Location</td><td>Project</td><td style="width: 15%">Status</td><td>Options</td>
+			</tr>
+		</thead>
+		<tbody>
+			{% for row in data %}
+			<tr id="row-{{row.equip.id}}" >
+				<td>{{row.equip.models.brands.name}} </td>
+				<td>{{row.equip.models.name}} </td>
+				<td>{{row.equip.models.typeEquipments.name}} </td>
+				<td>{{row.equip.serial}} </td>
+				<td>{% if row.equip.locations != NULL %}{{row.equip.locations.typeLocations.name}} {{row.equip.locations.name}}{% endif %} </td>
+				<td>{% if row.equip.locations != NULL %}{{row.equip.locations.projects.name}}{% endif %} </td>
+				<td>{% if row.equip.state == 1 %}Active / Operative{% else %}Inactive / Non Operative / Bad{% endif%} </td>
+				<td><a href="{{row.view}}">View</a><a href="{{row.edit}}">Edit</a> <a href="javascript:void(0)" class="delete" pk="{{row.equip.id}}">Delete</a></td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

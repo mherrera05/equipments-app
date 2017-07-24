@@ -1,0 +1,32 @@
+{% extends "RtoCoreBundle:layout:index.html.twig" %}
+
+{% block  title %}
+Record
+{% endblock %}
+
+{% block css %}
+<link href="{{asset('bundles/rtocore/css/jquery-ui.min.css')}}" type="text/css" rel="stylesheet">
+<link href="{{asset('bundles/rtocore/css/jquery-ui.structure.min.css')}}" type="text/css" rel="stylesheet">
+{% endblock %}
+
+{% block vars %}
+<script type="text/javascript">
+</script>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{{asset('bundles/rtocore/js/jquery-ui.min.js')}}"></script>
+<script type="text/javascript">
+</script>
+{% endblock %}
+
+{% block  content %}
+<div>
+	Record
+</div>
+{% for row in data %}
+<ul class="block-record">
+	<li>{% if row.worktime.locations == NULL %}At Home {% else %}{{row.worktime.locations.name}}{% endif %} / {% if row.worktime.locations == NULL%} None {% else %}{{row.worktime.locations.projects.name}}{% endif %}</li><li>{{row.days}} days</li>
+</ul>
+{% endfor %}
+{% endblock %}

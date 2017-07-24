@@ -1,0 +1,74 @@
+{% extends "RtoCoreBundle:layout:index.html.twig" %}
+
+{% block  title %}
+Locations
+{% endblock %}
+
+{% block vars %}
+<script type="text/javascript">
+	var addressUpdateLocation = '{{path('Admin_updateLocation')}}';
+	var map = mapOptions = ''; 
+</script>
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block js %}
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+<script type="text/javascript" src="{{asset('bundles/rtoadmin/js/locations/edit.min.js')}}"></script>
+{% endblock %}
+
+{% block  content %}
+<div>
+	Locations
+</div>
+<form method="POST" name="form" id="form" class="maps" onsubmit="return false;">
+	<p>
+		<label for="project">Project: </label>
+		<input type="hidden" name="id" id="id" value="{{data.id}}" >
+		<select name="project" id="project" >
+			<option value="">Choose..</option>
+			{% for element in projects %}
+			<option value="{{element.project.id}}" {% if data.projects != NULL and  element.project.id == data.projects.id %}selected {% endif %}>{{element.project.name}}</option>
+			{% endfor %}
+		</select>
+	</p>
+	<p>
+		<label for="type">Type of Location: </label>
+		<select name="type" id="type" required >
+			<option value="">Choose..</option>
+			{% for element in types %}
+			<option value="{{element.type.id}}" {% if element.type.id == data.typeLocations.id %}selected{% endif %}>{{element.type.name}}</option>
+			{% endfor %}
+		</select>
+	</p>
+	<p>
+		<label for="name">Name: </label>
+		<input type="text" name="name" id="name" required value="{{data.name}}">
+	</p>
+	<p>
+		<label for="latitude">Latitude: </label>
+		<input type="text" name="latitude" id="latitude" required value="{{data.latitude}}">
+	</p>
+	<p>
+		<label for="length">Length: </label>
+		<input type="text" name="length" id="length" required value="{{data.length}}">
+	</p>
+	<p>
+		<label for="gather">Collection Center: </label>
+		<input type="checkbox" name="gather" id="gather" {% if data.gather == 1 %}checked{% endif %} > <span class="checkbox"><label for="gather">Activate as Collection Center</label></span>
+	</p>
+	<p>
+		<label for="workplace">Workplace: </label>
+		<input type="checkbox" name="workplace" id="workplace" {% if data.workplace == 1 %}checked{% endif %} > <span class="checkbox"><label for="workplace">Activate as Workplace</label></span>
+	</p>
+	<p>
+		<span class="loader" id="loader-login"></span>
+		<button type="submit">
+			Save
+		</button>
+	</p>
+</form>
+<div id="map-canvas"></div>
+{% endblock %}

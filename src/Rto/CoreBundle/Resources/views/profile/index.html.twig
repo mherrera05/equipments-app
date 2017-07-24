@@ -1,0 +1,14 @@
+<ul>
+	<li>
+		<a href="javascript:void(0)" class="menu" >{{name}}</a>
+		<div>
+			<ul>
+				{% for element in profile %}
+				<li>
+					<a href="{{element.url}}">{{element.name}}</a>
+				</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</li>
+</ul>

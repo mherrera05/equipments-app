@@ -1,0 +1,19 @@
+if(!array_key_exists('copy', $data)){
+			$data['copy'] = null;
+		}
+		$transport = \Swift_SmtpTransport::newInstance('[whsmtp.corp.halliburton.com]',25); // Machoalpha01 paso aqui!
+		
+		// ADD THIS LINE
+		//$transport->setLocalDomain('[34.34.116.134]');
+		
+		// Create the Mailer using your created Transport
+		$mailer = \Swift_Mailer::newInstance($transport);
+		$message = \Swift_Message::newInstance()
+					   ->setSubject($data['title'])
+					   ->setFrom('no-reply@rtohall.com')
+					   ->setTo($data['email'])
+					   ->setCc($data['copy'])
+					   ->setBody($class->renderView($data['view'], array('data'=>$data)),'text/html');
+			
+		$mailer->send($message);
+		return 0;

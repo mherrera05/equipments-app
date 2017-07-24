@@ -1,0 +1,59 @@
+{% extends "RtoCoreBundle:layout:index.html.twig" %}
+
+{% block  title %}
+Models
+{% endblock %}
+
+{% block vars %}
+<script type="text/javascript">
+	var addressUpdateModel  = '{{path('Admin_updateModel')}}';
+</script>
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{{asset('bundles/rtoadmin/js/models/edit.min.js')}}"></script>
+{% endblock %}
+
+{% block  content %}
+<div>
+	Models
+</div>
+<form method="POST" name="form" id="form" onsubmit="return false;">
+	<p>
+		<label for="typeEquipments">Type of Equipments: </label>
+		<input type="hidden" name="id" id="id" value="{{data.id}}" >
+		<select name="type" id="type" required>
+			<option value="">Choose..</option>
+			{% for element in types %}
+			<option value="{{element.type.id}}" {% if element.type.id == data.typeEquipments.id %}selected{% endif%}>{{element.type.name}}</option>
+			{% endfor %}
+		</select>
+	</p>
+	<p>
+		<label for="brands">Brands: </label>
+		<select name="brand" id="brand" required>
+			<option value="">Choose..</option>
+			{% for element in brands %}
+			<option value="{{element.brand.id}}" {% if element.brand.id == data.brands.id %}selected{% endif%}>{{element.brand.name}}</option>
+			{% endfor %}
+		</select>
+	</p>
+	<p>
+		<label for="name">Name: </label>
+		<input type="text" name="name" id="name" required value="{{data.name}}">
+	</p>
+	<p>
+		<label for="description">Description: </label>
+		<textarea name="description" id="description">{{data.description}}</textarea>
+	</p>
+	<p>
+		<span class="loader" id="loader-login"></span>
+		<button type="submit">
+			Save
+		</button>
+	</p>
+</form>
+{% endblock %}

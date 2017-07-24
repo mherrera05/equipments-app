@@ -1,0 +1,54 @@
+{% extends "RtoCoreBundle:layout:login.html.twig" %}
+
+{% block title %}
+Login
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+angular.module('loginApp', ['ngMaterial', 'ngMessages']).controller('login', function($scope) {
+  	});
+	
+	$(document).ready(function(){
+		$("#form").submit(function(){
+			$("#loader-access").show();
+		});
+		if($("#error").length > 0){
+			$(".alert").addClass("alert-danger").html($("#error").val()).show();
+		}else{
+			$(".alert").hide();
+		}
+	});
+</script>
+{% endblock %}
+
+{% block content %}
+<section ng-controller="login" class="md-inline-form">
+	{% if error != '' %}
+	<input type="hidden" name="error" id="error" value="{{error.message}}">
+	{% endif %}
+	<form name="form" id="form" action="{{path('login_check')}}" method="POST">
+		<p>
+			 <md-input-container class="md-block" flex-gt-sm>
+            	<label>User ID</label>
+            	<input name="_username" id="userid" value="{{lastEmail}}" required>
+          	</md-input-container>
+		</p>
+		<p>
+			<md-input-container class="md-block" flex-gt-sm>
+            	<label>Password</label>
+            	<input type="password" name="_password" id="password" required>
+          	</md-input-container>
+		</p>
+		<p>
+			<span class="loader" id="loader-access"></span>
+			<md-button type="submit" class="md-raised">Log in</md-button>
+		</p>
+		<p>
+			<a href="#">Forget my password</a>
+		</p>
+	</form>
+</section>
+{% endblock %}
+
+

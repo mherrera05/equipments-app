@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Locations" table="locations">
+    <indexes>
+      <index name="fk_locations_projects1_idx" columns="projects_id"/>
+      <index name="fk_locations_type_locations1_idx" columns="type_locations_id"/>
+    </indexes>
+    <unique-constraints>
+      <unique-constraint name="id_UNIQUE" columns="id"/>
+    </unique-constraints>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="name" type="string" column="name" length="80" nullable="false"/>
+    <field name="latitude" type="float" column="latitude" precision="10" scale="0" nullable="true"/>
+    <field name="length" type="float" column="length" precision="10" scale="0" nullable="true"/>
+    <field name="gather" type="boolean" column="gather" nullable="false"/>
+    <field name="workplace" type="boolean" column="workplace" nullable="false"/>
+    <many-to-one field="typeLocations" target-entity="TypeLocations">
+      <join-columns>
+        <join-column name="type_locations_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="projects" target-entity="Projects">
+      <join-columns>
+        <join-column name="projects_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

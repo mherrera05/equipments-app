@@ -1,0 +1,47 @@
+{% extends "RtoCoreBundle:layout:index.html.twig" %}
+
+{% block  title %}
+Locate Staff
+{% endblock %}
+
+{% block vars %}
+<script type="text/javascript">
+	var addressLoadDetails = '{{path('User_userDetails')}}';
+	var map       		   = mapOptions = marker = '';
+	var locations 		   = new Array();
+	var route			   = '{{asset('')}}';
+</script>
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block js %}
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeHUWKV3OnrYvvUs1NvtmzTApQB3cVQsY&callback=initMap" async defer></script>
+<script type="text/javascript">
+	locations = [{% for element in data %}{% if loop.index == 1 %}['{{element["locationName"]}} - {{element["projectName"]}}','{{element["latitude"]}}','{{element["length"]}}','{{element["count"]}}','{{element["locationId"]}}']{% else %},['{{element["locationName"]}} - {{element["projectName"]}}','{{element["latitude"]}}','{{element["length"]}}','{{element["count"]}}','{{element["locationId"]}}']{% endif %}{% endfor %}];
+</script>
+<script type="text/javascript" src="{{asset('bundles/rtouser/js/locateStaff/index.min.js')}}"></script>
+{% endblock %}
+
+{% block  content %}
+<div>
+Locate Staff
+</div>
+<form>
+	
+</form>
+<div id="map-canvas-locate"></div>
+{% endblock %}
+
+{% block widget %}
+<section>
+	<div>
+		Information <span class="loader" id="loader-information"></span>
+	</div>
+	<ul >
+	<li class="title">No point selected</li>
+	<li class="content"></li>
+	</ul>
+</section>
+{% endblock %}

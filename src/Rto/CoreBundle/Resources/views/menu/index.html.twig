@@ -1,0 +1,14 @@
+{% for element in menu %}
+<li>
+	<a href="javascript:void(0)" class="menu">{{element.name}}</a>
+	<div>
+		<ul>
+			{% for option in element.list %}
+			<li>
+				<a href="{{option.url}}">{{option.name}}</a>
+			</li>
+			{% endfor %}
+		</ul>
+	</div>
+</li>
+{% endfor %}

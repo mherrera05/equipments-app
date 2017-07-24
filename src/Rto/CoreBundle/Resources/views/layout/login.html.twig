@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="loginApp">
+	<head>
+		<link href="{{asset('bundles/rtocore/css/style.css')}}" type="text/css" rel="stylesheet">
+		<link href="{{asset('bundles/rtocore/css/angular/angular-material.min.css')}}" type="text/css" rel="stylesheet">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		{% block css %}
+		{% endblock %}
+		<title>RTOHALL - {% block title %}{% endblock %}</title>
+	</head>
+	<body class="cover">
+		<header>
+			<section>
+				<div>
+					{% block logo %}
+					{% render (controller('RtoCoreBundle:Core:logo')) %}
+					{% endblock %}
+				</div>
+			</section>
+		</header>
+		<section class="board">
+			    <section>
+				    <section>
+				    	<section>
+				    		<ul>
+				    			<li></li><li>Installed</li><li></li><li>No installed</li><li><span></span></li><li>Amount</li>
+				    		</ul>
+				    	</section>
+				    	{% render (controller('RtoCoreBundle:Core:board')) %}
+					</section>
+					{% block content %}
+					{% endblock %}
+				</section>
+		</section>
+		<div class="alert">
+			Information message to user!!
+		</div>
+		<footer>
+			&copy; Copyrigth 2014 | Developed by RTO | Contact: Miguel Herrera - Migueljose.Herreraquijada@halliburton.com
+		</footer>
+	</body>
+		<script type="text/javascript" src="{{asset('bundles/rtocore/js/jquery.min.js')}}"></script>
+		<script type="text/javascript" src="{{asset('bundles/rtocore/js/angular/angular.min.js')}}"></script>
+		<script type="text/javascript" src="{{asset('bundles/rtocore/js/angular/angular-animate.min.js')}}"></script>
+		<script type="text/javascript" src="{{asset('bundles/rtocore/js/angular/angular-aria.min.js')}}"></script>
+		<script type="text/javascript" src="{{asset('bundles/rtocore/js/angular/angular-messages.min.js')}}"></script>
+		<script type="text/javascript" src="{{asset('bundles/rtocore/js/angular/angular-material.min.js')}}"></script>
+		<script type="text/javascript" src="{{asset('bundles/rtocore/js/core.min.js')}}"></script>
+		{% block js %}
+		{% endblock %}
+</html>

@@ -1,0 +1,37 @@
+{% extends "RtoCoreBundle:layout:index.html.twig" %}
+
+{% block  title %}
+Operators
+{% endblock %}
+
+{% block vars %}
+<script type="text/javascript">
+	var addressUpdateTypeEquipments  = '{{path('Admin_updateTypeEquipments')}}';
+</script>
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{{asset('bundles/rtoadmin/js/typeEquipments/edit.min.js')}}"></script>
+{% endblock %}
+
+{% block  content %}
+<div>
+	Type of Equipments
+</div>
+<form method="POST" name="form" id="form" onsubmit="return false;">
+	<p>
+		<label for="name">Name: </label>
+		<input type="hidden" name="id" id="id" value="{{data.id}}" >
+		<input type="text" name="name" id="name" required value="{{data.name}}">
+	</p>
+	<p>
+		<span class="loader" id="loader-login"></span>
+		<button type="submit">
+			Save
+		</button>
+	</p>
+</form>
+{% endblock %}

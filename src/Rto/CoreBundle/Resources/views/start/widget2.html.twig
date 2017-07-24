@@ -1,0 +1,24 @@
+<ul >
+	<li class="title">Pending Task</li>
+	<li class="content">{% if installations.count != 0 %}<a href="{{installations.url}}">{{installations.count}} installations to close </a> {% else %}0 installations to close{% endif %}</li>
+	<li class="content">{% if uninstallations.count != 0 %}<a href="{{uninstallations.url}}">{{uninstallations.count}} uninstallaions to close </a> {% else %}0 uninstallations to close{% endif %}</li>
+</ul>
+{% if projects %}
+<ul >
+	<li class="title">Projects Assigned</li>
+	{% for element in projects %}
+	<li class="content">{{element.name}}</li>
+	{% endfor %}
+</ul>
+{% endif %}
+<ul class="projects">
+	<li class="title">Projects</li>
+	{% for element in allProjects %}
+	<li class="project">{{element.project.name}} <a href="{{element.view}}">View</a></li>
+	{% if element.project.users %}
+	<li class="responsible">{{element.project.users.userid}} - {{element.project.users.name}} {{element.project.users.lastname}}</li>
+	{% else %}
+	<li class="responsible">No responsible</li>
+	{% endif%}
+	{% endfor %}
+</ul>

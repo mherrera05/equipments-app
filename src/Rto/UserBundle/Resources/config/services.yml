@@ -1,0 +1,7 @@
+parameters:
+#    rto_user.example.class: Rto\UserBundle\Example
+
+services:
+#    rto_user.example:
+#        class: %rto_user.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

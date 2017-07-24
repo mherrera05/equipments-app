@@ -1,0 +1,57 @@
+security:
+    encoders:
+        Rto\CoreBundle\Entity\Users:
+            algorithm:        sha512
+            encode_as_base64: false
+            iterations:       1
+
+    role_hierarchy:
+        ROLE_OPERATOR:    ROLE_OPERATOR
+        ROLE_COORD:       ROLE_COORD
+        ROLE_ADMIN:       ROLE_ADMIN
+        ROLE_SUPER_ADMIN: [ ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH ]
+
+    providers:
+        main:
+            entity: { class: Rto\CoreBundle\Entity\Users, property: userid }
+
+    firewalls:
+      dev:
+        pattern:  ^/(_(profiler|wdt)|css|images|js)/
+        security: false
+  
+      secured_area:
+        pattern:    ^/
+        anonymous: ~
+  
+        form_login:
+          check_path: /login_check
+          login_path: /login
+        
+        remember_me:
+              key:      "%secret%"
+              lifetime: 31536000 # 365 days in seconds
+              path:     /
+              domain:   ~ # Defaults to the current domain from $_SERVER
+              
+        logout:
+          path: /logout
+          target: /
+
+    access_control:
+        - { path: ^/admin, roles: [ROLE_COORD,ROLE_ADMIN] }
+        - { path: ^/locations, roles: [ROLE_OPERATOR,ROLE_COORD,ROLE_ADMIN] }
+        - { path: ^/users, roles: [ROLE_OPERATOR,ROLE_COORD,ROLE_ADMIN] }
+        - { path: ^/user/new, roles: [ROLE_ADMIN,ROLE_COORD] }
+        - { path: ^/user/edit, roles: [ROLE_ADMIN,ROLE_COORD] }
+        - { path: ^/user/delete, roles: [ROLE_ADMIN,ROLE_COORD] }
+        - { path: ^/assigning-staff, roles: [ROLE_COORD] }
+        - { path: ^/record, roles: [ROLE_COORD,ROLE_OPERATOR] }
+        - { path: ^/equipments, roles: [ROLE_OPERATOR,ROLE_COORD] }
+        - { path: ^/equipments/installations, roles: [ROLE_OPERATOR,ROLE_COORD] }
+        - { path: ^/equipments/uninstallations, roles: [ROLE_OPERATOR,ROLE_COORD] }
+        - { path: ^/equipments/locate, roles: [ROLE_OPERATOR,ROLE_COORD] }
+        - { path: ^/profile, roles: [ROLE_OPERATOR,ROLE_COORD,ROLE_ADMIN] }
+        - { path: ^/projects, roles: [ROLE_OPERATOR,ROLE_COORD,ROLE_ADMIN] }
+        
+        

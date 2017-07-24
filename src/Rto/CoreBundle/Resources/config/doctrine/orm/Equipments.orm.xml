@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Equipments" table="equipments">
+    <indexes>
+      <index name="fk_equipments_models1_idx" columns="models_id"/>
+      <index name="fk_equipments_locations1_idx" columns="locations_id"/>
+      <index name="fk_equipments_users1_idx" columns="users_id"/>
+    </indexes>
+    <unique-constraints>
+      <unique-constraint name="id_UNIQUE" columns="id"/>
+      <unique-constraint name="serail_UNIQUE" columns="serial"/>
+      <unique-constraint name="hostname_UNIQUE" columns="hostname,serial,mac"/>
+    </unique-constraints>
+    <id name="id" type="bigint" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="serial" type="string" column="serial" length="60" nullable="false"/>
+    <field name="mac" type="string" column="mac" length="60" nullable="true"/>
+    <field name="date" type="datetime" column="date" nullable="false"/>
+    <field name="state" type="boolean" column="state" nullable="false"/>
+    <field name="dateUpdate" type="datetime" column="date_update" nullable="true"/>
+    <field name="hostname" type="string" column="hostname" length="60" nullable="true"/>
+    <many-to-one field="users" target-entity="Users">
+      <join-columns>
+        <join-column name="users_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="models" target-entity="Models">
+      <join-columns>
+        <join-column name="models_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="locations" target-entity="Locations">
+      <join-columns>
+        <join-column name="locations_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

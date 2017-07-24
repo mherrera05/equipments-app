@@ -1,0 +1,58 @@
+{% extends "RtoCoreBundle:layout:index.html.twig" %}
+
+{% block  title %}
+Uninstallations
+{% endblock %}
+
+{% block vars %}
+<script type="text/javascript">
+</script>
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{{asset('bundles/rtoequipments/js/uninstallEquipments/view.min.js')}}"></script>
+{% endblock %}
+
+{% block  content %}
+<div>
+	Equipments
+</div>
+	<div class="view-installation">
+		<ul>
+			<li>Uninstallation #:</li><li>{{data.id}}</li>
+		</ul>
+		<ul>
+			<li>Created:</li><li>{{data.date | date("d-m-Y")}}</li>
+		</ul>
+		<ul>
+			<li>Location: </li><li>{{data.locations.name}} / {{data.locations.projects.name}}</li>
+		</ul>
+		<ul>
+			<li>Uninstalled:</li><li>{{data.dateRegistered | date("d-m-Y")}}</li>
+		</ul>
+		<ul>
+			<li>Responsable:</li><li>{{data.users.userid}} - {{data.users.name}} {{data.users.lastname}}</li>
+		</ul>
+		<ul>
+			<li>Comments:</li><li>{{data.comments}}</li>
+		</ul>
+		<div class="equipments">
+		<ul>
+			<li>Serial</li><li>Equipment</li><li>Model</li>
+		</ul>
+		{% for element in equipments %}
+		<ul>
+			<li>{{element.equipments.serial}}</li><li>{{element.equipments.models.typeEquipments.name}}</li><li>{{element.equipments.models.name}}</li>
+		</ul>
+		{% endfor %}
+		</div>
+	</div>
+	<p>
+		<!-- <button url="">Edit</button> -->
+	</p>
+<!--<div class="barcode">
+</div> -->
+{% endblock %}

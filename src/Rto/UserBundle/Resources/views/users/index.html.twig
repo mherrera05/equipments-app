@@ -1,0 +1,53 @@
+{% extends "RtoCoreBundle:layout:index.html.twig" %}
+
+{% block  title %}
+Staff
+{% endblock %}
+
+{% block css %}
+<link href="{{asset('bundles/rtocore/js/jquery-datatable/media/css/jquery.dataTables.min.css')}}" type="text/css" rel="stylesheet">
+<link href="{{asset('bundles/rtocore/js/jquery-datatable/extensions/TableTools/css/dataTables.tableTools.min.css')}}" type="text/css" rel="stylesheet">
+{% endblock %}
+
+{% block vars %}
+<script type="text/javascript">
+	var addressDeleteUser = '{{path('User_deleteUser')}}';
+</script>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{{asset('bundles/rtocore/js/jquery-datatable/media/js/jquery.dataTables.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/rtocore/js/jquery-datatable/extensions/TableTools/js/dataTables.tableTools.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/rtouser/js/users/index.min.js')}}"></script>
+{% endblock %}
+
+{% block  content %}
+<div>
+	Staff
+</div>
+<p>
+	{% if app.user.role != "ROLE_OPERATOR" %}<button type="button" class="new-button" route="{{url}}">New User</button>{% endif %}
+</p>
+<div class="clear"></div>
+	<table id="users">
+		<thead>
+			<tr>
+				<td>Name</td><td>User ID</td><td>E-mail</td><td>Role</td><td>Options</td>
+			</tr>
+		</thead>
+		<tbody>
+			{% for row in data %}
+			<tr id="row-{{row.user.id}}">
+				<td>{{row.user.name}} {{row.user.lastname}}</td><td>{{row.user.userid}}</td><td>{{row.user.email}}</td><td>{% if row.user.role == 'ROLE_ADMIN' %}
+																																Administrator
+																														   {% elseif row.user.role == 'ROLE_COORD' %}
+																																Coordinator / Manager
+																														   {% elseif row.user.role == 'ROLE_OPERATOR' %}
+																														   		Operator
+																														   {% endif %}</td>
+				<td>{% if (row.user.id != session.id ) %}{% if session.role != 'ROLE_OPERATOR' %}<a href="{{row.edit}}">Edit</a> <a href="javascript:void(0)" class="delete" pk="{{row.user.id}}">Delete</a>{% endif %}{% endif %}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

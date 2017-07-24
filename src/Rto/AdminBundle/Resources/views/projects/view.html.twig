@@ -1,0 +1,69 @@
+{% extends "RtoCoreBundle:layout:index.html.twig" %}
+
+{% block  title %}
+Projects
+{% endblock %}
+
+{% block vars %}
+<script type="text/javascript">
+</script>
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{{asset('bundles/rtoequipments/js/equipments/view.min.js')}}" ></script>
+{% endblock %}
+
+{% block  content %}
+<div>
+	Project
+</div>
+	<div class="view-project">
+		<ul>
+			<li>{{project.name}}</li>
+		</ul>
+		<div>Responsible</div>
+		{% if project.users != '' %}
+		<ul>
+			<li><img src="{{asset('images/users/default.jpg')}}"></li>
+			<li><span>{{project.users.name}} {{project.users.lastname}}</span>
+				<span>{{project.users.userid}}</span>
+				<span>{{project.users.email}}</span>
+				
+			</li>
+		</ul>
+		{% else %}
+		<ul>
+			<li></li>
+			<li><span>No assigned</span>
+			</li>
+		</ul>
+		{% endif %}
+		<!--<div>Resources</div>
+		<div>
+			<ul>
+				<li><img src="{{asset('images/users/default.jpg')}}"></li>
+				<li>
+					<span>Miguel Herrera</span>
+					<span>h152610</span>
+					<span>MiguelJose.HerreraQuijada@halliburton.com</span>
+				</li>
+			</ul>
+		</div>-->
+		<div>Locations</div>
+		<div>
+			{% if locations != '' %}
+			<ul>
+				{% for element in locations %}
+				<li class="locations">{{element.name}}</li>
+				{% endfor %}
+			</ul>
+			{% else %}
+			No locations
+			{% endif %}
+		</div>
+	</div>
+	
+{% endblock %}

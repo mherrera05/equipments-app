@@ -1,0 +1,130 @@
+{% extends "RtoCoreBundle:layout:index.html.twig" %}
+
+{% block  title %}
+Assigning Staff
+{% endblock %}
+
+{% block css %}
+<link href="{{asset('bundles/rtocore/css/jquery-ui.min.css')}}" type="text/css" rel="stylesheet">
+<link href="{{asset('bundles/rtocore/css/jquery-ui.structure.min.css')}}" type="text/css" rel="stylesheet">
+{% endblock %}
+
+{% block vars %}
+<script type="text/javascript">
+	var addressReleaseOperator = '{{path('User_releaseOperator')}}';
+	var addressMoveOperator    = '{{path('User_moveOperator')}}';
+</script>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{{asset('bundles/rtocore/js/jquery-ui.min.js')}}"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$( ".element-draggable" ).draggable({revert:true});
+		$(".col").droppable({
+			revert: 'invalid',
+			accept: ".element-draggable",
+      		drop: function( event, ui ) {
+      			$(".col").removeClass("target-place");
+      			if($(this).attr("location") != ui.draggable.attr("location")){
+      				$(".element-draggable").removeClass("target");
+      				$(this).addClass("target-place");
+      				ui.draggable.addClass('target');
+					$('.modal .title').html('Are you sure, you want to move this operator?');
+					$("#delete").attr("worktime", ui.draggable.attr('worktime')).attr("pk", ui.draggable.attr('pk')).attr("action", "moving").attr("location", $(this).attr("location"));
+					$(".content-modal").show();
+      			}
+      		}
+        });
+		
+		/*$("ul.col > li.element-draggable").mouseover(function(){
+			$(this).find('a').show();
+		}).mouseout(function(){
+			$(this).find('a').hide();
+		});*/
+		
+		$("#delete").click(function(){
+			$(".content-modal").hide();
+			move($(this).attr("worktime"), $(this).attr("pk"),$(this).attr("location"), $(this).attr("action"));
+		});
+		
+		$("#close").click(function(){
+			$(".content-modal").hide();
+		});
+	});
+	$(document).on("mouseover", "ul.col > li.element-draggable", function(){
+		$(this).find('a').show();
+	}).on("mouseout", "ul.col > li.element-draggable", function(){
+		$(this).find('a').hide();
+	});
+	$(document).on( "click", "ul.col > li.element-draggable > a", function() {
+		$(this).parent().addClass('target');
+		$('.modal .title').html('Are you sure, you want to move this operator?');
+		$("#delete").attr("worktime", $(this).parent().attr('worktime')).attr("pk", $(this).parent().attr('pk')).attr("action", "delete").attr("location", '');
+		$(".content-modal").show();
+  		
+	});
+	function move(worktime, pk,location, type){
+		if(type == "delete"){
+			$("#loader-avaiable").show();
+			var data    = "worktime="+worktime+"&pk="+pk;
+			var element = $('.target');
+			$.post(addressReleaseOperator, data, function(send){
+				if(send.state){
+					element.find('a').remove();
+					$("div.avaiable ul.col").append('<li class="element-draggable rested-15" location="0" worktime="'+send.data.worktime+'" pk="'+send.data.pk+'">'+element.html()+'</li>');
+					element.remove();
+					$( ".element-draggable" ).draggable({revert:true});
+					$("#loader-avaiable").fadeOut('fast');
+					showMessage(send.type);
+				}
+			}, 'JSON');
+		}else if(type == "moving"){
+			$(".target-place > li > span").show();
+			var place   = $(".target-place");
+			var data    = "worktime="+worktime+"&pk="+pk+"&location="+location;
+			var element = $(".target");
+			$.post(addressMoveOperator, data, function(send){
+				if(send.state){
+					if(element.attr("location") == 0){
+						place.append('<li class="element-draggable worked-15" location="'+send.data.location+'" worktime="'+send.data.worktime+'" pk="'+send.data.pk+'">'+element.html()+'<a href="javascript::void(0)">x</a></li>');
+					}else{
+						place.append('<li class="'+element.attr("class")+'" location="'+send.data.location+'" worktime="'+send.data.worktime+'" pk="'+send.data.pk+'">'+element.html()+'</li>');
+					}
+					element.remove();
+					$( ".element-draggable" ).draggable({revert:true});
+					showMessage(send.type);
+					$(".target-place > li > span").hide();
+				}
+			}, 'JSON');
+		}
+	}
+	
+</script>
+{% endblock %}
+
+{% block  content %}
+<div>
+	Assigning Staff
+</div>
+<div class="avaiable">
+<ul class="col" location="0" id="sortable">
+	<li class="title">Avaiable Staff <span class="loader-16" id="loader-avaiable"></span></li>
+	{% for element in avaiables %}
+	<li class="element-draggable {% if (element.timeWorked >= 0 and element.timeWorked <= 15) %}rested-15{% endif %}{% if (element.timeWorked > 15 and element.timeWorked <= 30) %}rested-30{% endif %}{% if (element.timeWorked > 30 and element.timeWorked <= 45) %}rested-45{% endif %}{% if element.timeWorked > 45 %}rested-55{% endif %}" location='0' worktime="{{element.avaiable.id}}"  pk="{{element.avaiable.users.id}}">{{element.avaiable.users.userid}} - {{element.avaiable.users.name}} {{element.avaiable.users.lastname}} </li>
+	{% endfor %}
+</ul>
+</div>
+<div class="assigned">
+{% for element in assigned %}
+<ul class="col" location="{{element.location.id}}">
+	<li class="title">{{element.location.name}}<span class="loader-16" id="loader-location"></span></li>
+	{% if element.assigned != '' %}
+	{% for operator in element.assigned %}
+	<li class="element-draggable {% if (operator.timeWorked >= 0 and operator.timeWorked <= 15) %}worked-15{% endif %}{% if (operator.timeWorked > 15 and operator.timeWorked <= 30)%}worked-30{% endif %}{% if (operator.timeWorked > 30 and operator.timeWorked <= 45)%}worked-45{% endif %}{% if operator.timeWorked > 45 %}worked-55{% endif %}" location="{{element.location.id}}"  worktime="{{operator.operator.id}}" pk="{{operator.operator.users.id}}">{{operator.operator.users.userid}} - {{operator.operator.users.name}} {{operator.operator.users.lastname}}  <a href="javascript::void(0)">x</a></li>
+	{% endfor %}
+	{% endif %}
+</ul>
+{% endfor %}
+</div>
+{% endblock %}

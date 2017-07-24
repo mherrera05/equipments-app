@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Models" table="models">
+    <indexes>
+      <index name="fk_models_brands_idx" columns="brands_id"/>
+      <index name="fk_models_type_equipments1_idx" columns="type_equipments_id"/>
+    </indexes>
+    <unique-constraints>
+      <unique-constraint name="id_UNIQUE" columns="id"/>
+    </unique-constraints>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="name" type="string" column="name" length="60" nullable="false"/>
+    <field name="description" type="text" column="description" nullable="true"/>
+    <many-to-one field="typeEquipments" target-entity="TypeEquipments">
+      <join-columns>
+        <join-column name="type_equipments_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="brands" target-entity="Brands">
+      <join-columns>
+        <join-column name="brands_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

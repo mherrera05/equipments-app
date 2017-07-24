@@ -1,0 +1,57 @@
+{% extends "RtoCoreBundle:layout:index.html.twig" %}
+
+{% block  title %}
+Equipments
+{% endblock %}
+
+{% block vars %}
+<script type="text/javascript">
+</script>
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{{asset('bundles/rtoequipments/js/equipments/view.min.js')}}" ></script>
+{% endblock %}
+
+{% block  content %}
+<div>
+	Equipments
+</div>
+	<div class="view">
+		<ul>
+			<li>#</li><li>{{data.id}}</li>
+		</ul>
+		<ul>
+			<li>Type of Equipment:</li><li>{{data.models.typeEquipments.name}}</li>
+		</ul>
+		<ul>
+			<li>Brand:</li><li>{{data.models.brands.name}}</li>
+		</ul>
+		<ul>
+			<li>Model:</li><li>{{data.models.name}}</li>
+		</ul>
+		<ul>
+			<li>Serial:</li><li>{{data.serial}}</li>
+		</ul>
+		<ul>
+			<li>MAC:</li><li>{{data.mac}}</li>
+		</ul>
+		<ul>
+			<li>Hostname:</li><li>{{data.hostname}}</li>
+		</ul>
+		<ul>
+			<li>Current Location:</li><li>{{data.locations.name}}</li>
+		</ul>
+		<ul>
+			<li>Status:</li><li>{% if data.state == 1 %} Active {% else %} Bad / Inactive {% endif %}</li>
+		</ul>
+	</div>
+	<p>
+		<button url="{{url}}">Edit</button>
+	</p>
+<!--<div class="barcode">
+</div> -->
+{% endblock %}

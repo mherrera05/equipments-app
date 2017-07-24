@@ -1,0 +1,45 @@
+{% extends "RtoCoreBundle:layout:index.html.twig" %}
+
+{% block  title %}
+Projects
+{% endblock %}
+
+{% block vars %}
+<script type="text/javascript">
+	var addressCreateProject  = '{{path('Admin_createProject')}}';
+</script>
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{{asset('bundles/rtoadmin/js/projects/new.min.js')}}"></script>
+{% endblock %}
+
+{% block  content %}
+<div>
+	Projects
+</div>
+<form method="POST" name="form" id="form" onsubmit="return false;">
+	<p>
+		<label for="name">Name: </label>
+		<input type="text" name="name" id="name" required >
+	</p>
+	<p>
+		<label for="responsable">Responsable: </label>
+		<select name="responsable" id="responsable" >
+			<option value="">Choose..</option>
+			{% for element in responsables %}
+			<Option value="{{element.id}}">{{element.userid}} - {{element.name}} {{element.lastname}}</Option>
+			{% endfor %}
+		</select>
+	</p>
+	<p>
+		<span class="loader" id="loader-login"></span>
+		<button type="submit">
+			Save
+		</button>
+	</p>
+</form>
+{% endblock %}

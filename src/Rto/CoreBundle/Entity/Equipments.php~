@@ -1,0 +1,97 @@
+<?php
+
+namespace Rto\CoreBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Equipments
+ *
+ * @ORM\Table(name="equipments", uniqueConstraints={@ORM\UniqueConstraint(name="id_UNIQUE", columns={"id"}), @ORM\UniqueConstraint(name="serail_UNIQUE", columns={"serial"}), @ORM\UniqueConstraint(name="hostname_UNIQUE", columns={"hostname", "serial", "mac"})}, indexes={@ORM\Index(name="fk_equipments_models1_idx", columns={"models_id"}), @ORM\Index(name="fk_equipments_locations1_idx", columns={"locations_id"}), @ORM\Index(name="fk_equipments_users1_idx", columns={"users_id"})})
+ * @ORM\Entity
+ */
+class Equipments
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="bigint", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="serial", type="string", length=60, nullable=false)
+     */
+    private $serial;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="mac", type="string", length=60, nullable=true)
+     */
+    private $mac;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="datetime", nullable=false)
+     */
+    private $date;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="state", type="boolean", nullable=false)
+     */
+    private $state;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_update", type="datetime", nullable=true)
+     */
+    private $dateUpdate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="hostname", type="string", length=60, nullable=true)
+     */
+    private $hostname;
+
+    /**
+     * @var \Locations
+     *
+     * @ORM\ManyToOne(targetEntity="Locations")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="locations_id", referencedColumnName="id")
+     * })
+     */
+    private $locations;
+
+    /**
+     * @var \Models
+     *
+     * @ORM\ManyToOne(targetEntity="Models")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="models_id", referencedColumnName="id")
+     * })
+     */
+    private $models;
+
+    /**
+     * @var \Users
+     *
+     * @ORM\ManyToOne(targetEntity="Users")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="users_id", referencedColumnName="id")
+     * })
+     */
+    private $users;
+
+
+}

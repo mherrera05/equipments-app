@@ -1,0 +1,7 @@
+parameters:
+#    rto_reports.example.class: Rto\ReportsBundle\Example
+
+services:
+#    rto_reports.example:
+#        class: %rto_reports.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

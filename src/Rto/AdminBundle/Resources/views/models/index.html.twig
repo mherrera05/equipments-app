@@ -1,0 +1,59 @@
+{% extends "RtoCoreBundle:layout:index.html.twig" %}
+
+{% block  title %}
+Models
+{% endblock %}
+
+{% block css %}
+<link href="{{asset('bundles/rtocore/js/jquery-datatable/media/css/jquery.dataTables.min.css')}}" type="text/css" rel="stylesheet">
+<link href="{{asset('bundles/rtocore/js/jquery-datatable/extensions/TableTools/css/dataTables.tableTools.min.css')}}" type="text/css" rel="stylesheet">
+{% endblock %}
+
+{% block vars %}
+<script type="text/javascript">
+	var addressDeleteModel = '{{path('Admin_deleteModel')}}';
+</script>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{{asset('bundles/rtocore/js/jquery-datatable/media/js/jquery.dataTables.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/rtocore/js/jquery-datatable/extensions/TableTools/js/dataTables.tableTools.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/rtoadmin/js/models/index.min.js')}}"></script>
+{% endblock %}
+
+{% block  content %}
+<div>
+	Models
+</div>
+<p>
+	<button type="button" class="new-button" route="{{url}}">New Model</button>
+</p>
+<div class="clear"></div>
+	<table id="models">
+		<thead>
+			<tr>
+				<td>Models</td><td>Brand</td><td>Type of equipments</td><td>Description</td><td>Options</td>
+			</tr>
+		</thead>
+		<tbody>
+			{% for row in data %}
+			<tr id="row-{{row.model.id}}">
+				<td>{{row.model.name}} </td>
+				<td>{{row.model.brands.name}} </td>
+				<td>{{row.model.typeEquipments.name}} </td>
+				<td>{{row.model.description}} </td>
+				<td><a href="{{row.edit}}">Edit</a> <a href="javascript:void(0)" class="delete" pk="{{row.model.id}}">Delete</a></td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}
+
+{% block  widget %}
+<section>
+	<div>
+		Information
+	</div>
+	{% render (controller('RtoAdminBundle:Admin:countModels')) %}
+</section>
+{% endblock %}

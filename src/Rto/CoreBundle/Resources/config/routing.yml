@@ -1,0 +1,21 @@
+Core_start:
+  pattern: /
+  defaults: { _controller: RtoCoreBundle:Core:start }
+
+login_check:
+  pattern: /login_check
+
+logout:
+  pattern: /logout
+
+login:
+  pattern: /login
+  defaults: { _controller: RtoCoreBundle:Core:login }
+
+Core_test:
+  pattern: /test
+  defaults: { _controller: RtoCoreBundle:Core:test}
+
+Logs_Scroll:
+  pattern: /logs-scroll
+  defaults: { _controller: RtoCoreBundle:Core:logScroll }

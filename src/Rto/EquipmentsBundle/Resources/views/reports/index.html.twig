@@ -1,0 +1,166 @@
+{% extends "RtoCoreBundle:layout:index.html.twig" %}
+
+{% block  title %}
+Reports
+{% endblock %}
+
+{% block css %}
+<link href="{{asset('bundles/rtocore/js/jquery-datatable/media/css/jquery.dataTables.min.css')}}" type="text/css" rel="stylesheet">
+<link href="{{asset('bundles/rtocore/js/jquery-datatable/extensions/TableTools/css/dataTables.tableTools.min.css')}}" type="text/css" rel="stylesheet">
+{% endblock %}
+
+{% block vars %}
+<script type="text/javascript">
+	var addressLoadProjects     = '{{path('Admin_searchProject')}}';
+	var addressSearchLocation   = '{{path('Equipments_searchLocation')}}';
+	var addressGetReport        = '{{path('Equipments_getReport')}}';
+	var arrayProject			= new Array();
+</script>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{{asset('bundles/rtocore/js/jquery-datatable/media/js/jquery.dataTables.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/rtocore/js/jquery-datatable/extensions/TableTools/js/dataTables.tableTools.min.js')}}"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		/*$("#coordinator").change(function(){
+			if($(this).val()!=''){
+				$("#loader-coordinator").show();
+				loadProjects($(this).val());
+			}
+		});
+		$("#project").change(function(){
+			if($(this).val()!=''){
+				$("#loader-project2").show();
+				loadLocations($(this).val());
+			}
+		});*/
+		$("#form").submit(function(){
+			$('#loader-report').show();
+			$("button[type='submit']").attr("disabled", "disabled");
+			getReport($(this).serialize());
+		});
+	});
+	function loadProjects(id){
+		var data = 'coordinator='+id;
+		$.post(addressLoadProjects, data, function(send){
+			if(send.state){
+				if (send.type != '') {
+					showMessage(send.type);
+					$("#loader-coordinator").fadeOut('fast');
+				} else {
+					loadElement($("#project"), send.projects);
+					$("#loader-coordinator").fadeOut('fast');
+				}
+			}
+		}, 'JSON');
+		return false;
+	}
+	function loadLocations(id){
+		var data = 'project='+id;
+		$.post(addressSearchLocation, data, function(send){
+			if(send.state){
+				if (send.type != '') {
+					showMessage(send.type);
+					$("#loader-project2").fadeOut('fast');
+				} else {
+					loadElement($("#location"), send.locations);
+					$("#loader-project2").fadeOut('fast');
+				}
+			}
+		}, 'JSON');
+		return false;
+	}
+	function getReport(form){
+		var data = form;
+		$.post(addressGetReport, data, function(send){
+			if(send.state){
+				
+			}
+		}, 'JSON');
+		return false;
+	}
+</script>
+{% endblock %}
+
+{% block expand %}
+content-max-size
+{% endblock %}
+
+{% block  content %}
+<div>
+	Reports
+</div>
+<div class="form-report">
+	<form name="form" id="form" onsubmit="return false;">
+<p>
+	<label for="coordinator">Coordinator:</label>
+	<select name="coordinator" id="coordinator">
+				<option value="">All..</option>
+		{% for element in users %}
+			{% if element.user.role == 'ROLE_COORD' %}
+				<option value="{{element.user.id}}">{{element.user.userid}} - {{element.user.name}} {{element.user.lastname}}</option>
+			{% endif %}
+		{% endfor %}
+	</select>
+	<span class="loader" id="loader-coordinator"></span>
+</p>
+<p>
+	<label for="project">Projects:</label>
+	<select name="project" id="project">
+				<option value="">All..</option>
+		{% for element in projects %}
+				<option value="{{element.project.id}}">{{element.project.name}}</option>
+		{% endfor %}
+	</select>
+	<span class="loader" id="loader-project2"></span>
+</p>
+<p>
+	<label for="location">Locations:</label>
+	<select name="location" id="location">
+				<option value="">All..</option>
+		{% for element in locations %}
+				<option value="{{element.location.id}}">{{element.location.name}}</option>
+		{% endfor %}
+	</select>
+	<span class="loader" id="loader-model"></span>
+</p>
+<p>
+	<label for="brand">Brands:</label>
+	<select name="brand" id="brand">
+				<option value="">All..</option>
+		{% for element in brands %}
+				<option value="{{element.brand.id}}">{{element.brand.name}}</option>
+		{% endfor %}
+	</select>
+	<span class="loader" id="loader-model"></span>
+</p>
+<p>
+	<label for="type">Type of Equipments:</label>
+	<select name="type" id="type">
+				<option value="">All..</option>
+		{% for element in types %}
+				<option value="{{element.type.id}}">{{element.type.name}}</option>
+		{% endfor %}
+	</select>
+	<span class="loader" id="loader-model"></span>
+</p>
+<p>
+	<label for="model">Models:</label>
+	<select name="model" id="model">
+				<option value="">All..</option>
+		{% for element in models %}
+				<option value="{{element.model.id}}">{{element.model.name}}</option>
+		{% endfor %}
+	</select>
+	<span class="loader" id="loader-model"></span>
+</p>
+<p>
+	<button type="submit" class="new-button" route="">Generate</button>
+	<span class="loader" id="loader-report"></span>
+</p>
+	</form>
+</div>
+<div class="clear"></div>
+	
+{% endblock %}

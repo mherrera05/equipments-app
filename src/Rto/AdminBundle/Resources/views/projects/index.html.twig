@@ -1,0 +1,57 @@
+{% extends "RtoCoreBundle:layout:index.html.twig" %}
+
+{% block  title %}
+Projects
+{% endblock %}
+
+{% block css %}
+<link href="{{asset('bundles/rtocore/js/jquery-datatable/media/css/jquery.dataTables.min.css')}}" type="text/css" rel="stylesheet">
+<link href="{{asset('bundles/rtocore/js/jquery-datatable/extensions/TableTools/css/dataTables.tableTools.min.css')}}" type="text/css" rel="stylesheet">
+{% endblock %}
+
+{% block vars %}
+<script type="text/javascript">
+	var addressDeleteProject = '{{path('Admin_deleteProject')}}';
+</script>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{{asset('bundles/rtocore/js/jquery-datatable/media/js/jquery.dataTables.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/rtocore/js/jquery-datatable/extensions/TableTools/js/dataTables.tableTools.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/rtoadmin/js/projects/index.min.js')}}"></script>
+{% endblock %}
+
+{% block  content %}
+<div>
+	Projects
+</div>
+<p>
+	<button type="button" class="new-button" route="{{url}}">New Project</button>
+</p>
+<div class="clear"></div>
+	<table id="projects">
+		<thead>
+			<tr>
+				<td>Project</td><td>Responsible</td><td>Options</td>
+			</tr>
+		</thead>
+		<tbody>
+			{% for row in data %}
+			<tr id="row-{{row.project.id}}">
+				<td>{{row.project.name}} </td>
+				<td>{% if row.project.users %}{{row.project.users.userid}} - {{row.project.users.name}} {{row.project.users.lastname}}{% else %}Without{% endif %} </td>
+				<td><a href="{{row.edit}}">Edit</a> <a href="javascript:void(0)" class="delete" pk="{{row.project.id}}">Delete</a></td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}
+
+{% block  widget %}
+<section>
+	<div>
+		Information
+	</div>
+	{% render (controller('RtoAdminBundle:Admin:countProjects')) %}
+</section>
+{% endblock %}
