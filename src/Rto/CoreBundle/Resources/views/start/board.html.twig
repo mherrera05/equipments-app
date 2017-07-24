@@ -1,0 +1,12 @@
+{% for project in data %}
+<div>
+	{{project.project}}
+</div>
+<ul>
+	{% for location in project.data %}
+	<li class="{% if location.equips > 0 %}installed{% else %} no-installed{% endif %}">
+		{{location.location}} {% if location.equips > 0 %} <span>{{location.equips}}</span>{% endif %}
+	</li>
+	{% endfor %}
+</ul>
+{% endfor %}

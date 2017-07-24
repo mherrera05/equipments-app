@@ -1,0 +1,62 @@
+#User
+User_users:
+  path:     /users
+  defaults: { _controller: RtoUserBundle:User:users }
+
+User_newUser:
+  path: /user/new
+  defaults: { _controller: RtoUserBundle:User:newUser }
+
+User_editUser:
+  path: /user/edit/{id}
+  defaults: { _controller: RtoUserBundle:User:editUser }
+
+#Assigning Staff
+Users_assigningStaff:
+  path: /assigning-staff
+  defaults: { _controller: RtoUserBundle:User:assigningStaff }
+  
+# Time Worked
+User_record:
+  path: /record
+  defaults: { _controller: RtoUserBundle:User:record }
+  
+# Locate Staff
+User_locateStaff:
+  path: /locate-staff
+  defaults: { _controller: RtoUserBundle:User:locateStaff }
+  
+# User  - Ajax
+User_createUser:
+  path: /user/create
+  defaults: { _controller: RtoUserBundle:UserAjax:createUser }
+
+User_updateUser:
+  path: /user/update
+  defaults: { _controller: RtoUserBundle:UserAjax:updateUser }
+
+User_deleteUser:
+  path: /user/delete
+  defaults: { _controller: RtoUserBundle:UserAjax:deleteUser }
+
+User_searchEmail:
+  path: /user/searchEmail
+  defaults: { _controller: RtoUserBundle:UserAjax:searchEmail }
+  
+User_searchUserId:
+  path: /user/searchUserId
+  defaults: { _controller: RtoUserBundle:UserAjax:searchUserId }
+  
+#Assigning Staff - Ajax
+User_releaseOperator:
+  path: /assigning-staff/release-operator
+  defaults: { _controller: RtoUserBundle:UserAjax:releaseOperator }
+
+User_moveOperator:
+  path: /assigning-staff/move-operator
+  defaults: { _controller: RtoUserBundle:UserAjax:moveOperator }
+
+# Locate Staff - Ajax
+User_userDetails:
+  path: /locate-staff/load-details
+  defaults: { _controller: RtoUserBundle:UserAjax:loadDetails }

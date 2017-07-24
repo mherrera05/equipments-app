@@ -1,0 +1,58 @@
+{% extends "RtoCoreBundle:layout:index.html.twig" %}
+
+{% block  title %}
+Models
+{% endblock %}
+
+{% block vars %}
+<script type="text/javascript">
+	var addressCreateModel  = '{{path('Admin_createModel')}}';
+</script>
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{{asset('bundles/rtoadmin/js/models/new.min.js')}}"></script>
+{% endblock %}
+
+{% block  content %}
+<div>
+	Models
+</div>
+<form method="POST" name="form" id="form" onsubmit="return false;">
+	<p>
+		<label for="type">Type of Equipment: </label>
+		<select name="type" id="type" required >
+			<option value="" >Choose..</option>
+			{% for element in types %}
+			<option value="{{element.type.id}}">{{element.type.name}}</option>
+			{% endfor %}
+		</select>
+	</p>
+	<p>
+		<label for="brand">Brand: </label>
+		<select name="brand" id="brand" required >
+			<option value="" >Choose..</option>
+			{% for element in brands %}
+			<option value="{{element.brand.id}}">{{element.brand.name}}</option>
+			{% endfor %}
+		</select>
+	</p>
+	<p>
+		<label for="name">Name: </label>
+		<input type="text" name="name" id="name" required >
+	</p>
+	<p>
+		<label for="description">Description: </label>
+		<textarea name="description" id="description" required ></textarea>
+	</p>
+	<p>
+		<span class="loader" id="loader-login"></span>
+		<button type="submit">
+			Save
+		</button>
+	</p>
+</form>
+{% endblock %}

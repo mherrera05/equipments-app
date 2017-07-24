@@ -1,0 +1,100 @@
+{% extends "RtoCoreBundle:layout:index.html.twig" %}
+
+{% block  title %}
+Equipments
+{% endblock %}
+
+{% block vars %}
+<script type="text/javascript">
+	var addressCreateEquipment = '{{path('Equipments_createEquipment')}}';
+	var addressSearchModels = '{{path('Equipments_searchModels')}}';
+	var addressSearchSerial = '{{path('Equipments_searchSerial')}}';
+	var addressSearchMac = '{{path('Equipments_searchMac')}}';
+</script>
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block js %}
+<!--<script type="text/javascript" src="{{asset('bundles/rtoequipments/js/jquery-barcode.js')}}"></script> -->
+<script type="text/javascript" src="{{asset('bundles/rtoequipments/js/equipments/new.min.js')}}" ></script>
+{% endblock %}
+
+{% block  content %}
+<div>
+	Equipments
+</div>
+<form method="POST" name="form" id="form" onsubmit="return false;">
+	<p>
+		<label for="type">Type of Equipment: </label>
+		<select name="type" id="type" required>
+			<option value="">Choose..</option>
+			{% for element in types %}
+			<option value="{{element.type.id}}">{{element.type.name}}</option>
+			{% endfor %}
+		</select>
+	</p>
+	<p>
+		<label for="brand">Brand: </label>
+		<select name="brand" id="brand" required>
+			<option value="">Choose..</option>
+			{% for element in brands %}
+			<option value="{{element.brand.id}}">{{element.brand.name}}</option>
+			{% endfor %}
+		</select>
+	</p>
+	<p>
+		<label for="model">Model: </label>
+		<select name="model" id="model" required readonly>
+			<option value="">Choose..</option>
+		</select>
+		<span class="loader" id="loader-model"></span>
+	</p>
+	<p>
+		<label for="serial">Serial: </label>
+		<input type="text" name="serial" id="serial" required >
+	</p>
+	<p>
+		<label for="mac">MAC: </label>
+		<input type="text" name="mac" id="mac" >
+	</p>
+	<p>
+		<label for="hostname">Hostname: <span>(If PC)</span></label>
+		<input type="text" name="hostname" id="hostname" >
+	</p>
+	<p>
+		<label for="location">Location: </label>
+		<select name="location" id="location" >
+			<option value="">Choose..</option>
+			{% for element in locations %}
+			<option value="{{element.location.id}}">{{element.location.name}}</option>
+			{% endfor %}
+		</select>
+	</p>
+	<p>
+		<label for="responsable">Responsable: </label>
+		<select name="responsable" id="responsable" required>
+			<option value="">Choose..</option>
+			{% for element in users %}
+			<option value="{{element.user.id}}" {% if element.user.id == session.id %}selected{% endif %}>{{element.user.userid}} - {{element.user.name}} {{element.user.lastname}}</option>
+			{% endfor %}
+		</select>
+	</p>
+	<p>
+		<label for="state">Status: </label>
+		<select name="state" id="state" required>
+			<option value="1">Active / Operative</option>
+			<option value="0">Inactive / Non Operative / Bad</option>
+		</select>
+	</p>
+	<p>
+		<span class="loader" id="loader-login"></span>
+		<button type="submit">
+			Save
+		</button>
+	</p>
+</form>
+<!-- <div class="barcode">
+</div> -->
+{% endblock %}

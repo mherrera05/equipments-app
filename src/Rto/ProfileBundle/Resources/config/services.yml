@@ -1,0 +1,7 @@
+parameters:
+#    rto_profile.example.class: Rto\ProfileBundle\Example
+
+services:
+#    rto_profile.example:
+#        class: %rto_profile.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

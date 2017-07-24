@@ -1,0 +1,7 @@
+parameters:
+#    rto_equipments.example.class: Rto\EquipmentsBundle\Example
+
+services:
+#    rto_equipments.example:
+#        class: %rto_equipments.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

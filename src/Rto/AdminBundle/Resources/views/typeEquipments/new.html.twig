@@ -1,0 +1,36 @@
+{% extends "RtoCoreBundle:layout:index.html.twig" %}
+
+{% block  title %}
+Operators
+{% endblock %}
+
+{% block vars %}
+<script type="text/javascript">
+	var addressCreateTypeEquipments  = '{{path('Admin_createTypeEquipments')}}';
+</script>
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{{asset('bundles/rtoadmin/js/typeEquipments/new.min.js')}}"></script>
+{% endblock %}
+
+{% block  content %}
+<div>
+	Type of Equipments
+</div>
+<form method="POST" name="form" id="form" onsubmit="return false;">
+	<p>
+		<label for="name">Name: </label>
+		<input type="text" name="name" id="name" required >
+	</p>
+	<p>
+		<span class="loader" id="loader-login"></span>
+		<button type="submit">
+			Save
+		</button>
+	</p>
+</form>
+{% endblock %}

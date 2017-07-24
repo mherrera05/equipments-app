@@ -1,0 +1,73 @@
+{% extends "RtoCoreBundle:layout:index.html.twig" %}
+
+{% block  title %}
+Locations
+{% endblock %}
+
+{% block vars %}
+<script type="text/javascript">
+	var addressCreateLocation  = '{{path('Admin_createLocation')}}';
+	var map = mapOptions = '';
+</script>
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block js %}
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+<script type="text/javascript" src="{{asset('bundles/rtoadmin/js/locations/new.min.js')}}"></script>
+{% endblock %}
+
+{% block  content %}
+<div>
+Locations
+</div>
+<form method="POST" name="form" id="form" class="maps" onsubmit="return false;">
+	<p>
+		<label for="project">Project: </label>
+		<select name="project" id="project">
+			<option value="">Choose..</option>
+			{% for element in projects %}
+			<option value="{{element.project.id}}">{{element.project.name}}</option>
+			{% endfor %}
+		</select>
+	</p>
+	<p>
+		<label for="type">Type of Location: </label>
+		<select name="type" id="type" required>
+			<option value="">Choose..</option>
+			{% for element in types %}
+			<option value="{{element.type.id}}">{{element.type.name}}</option>
+			{% endfor %}
+		</select>
+	</p>
+	<p>
+		<label for="name">Name: </label>
+		<input type="text" name="name" id="name" required >
+	</p>
+	<p>
+		<label for="latitude">Latitude: </label>
+		<input type="text" name="latitude" id="latitude"  >
+	</p>
+	<p>
+		<label for="length">Length: </label>
+		<input type="text" name="length" id="length"  >
+	</p>
+	<p>
+		<label for="gather">Collection Center: </label>
+		<input type="checkbox" name="gather" id="gather"  > <span class="checkbox"><label for="gather">Activate as Collection Center</label></span>
+	</p>
+	<p>
+		<label for="workplace">Workplace: </label>
+		<input type="checkbox" name="workplace" id="workplace"  > <span class="checkbox"><label for="workplace">Active as Workplace</label></span>
+	</p>
+	<p>
+		<span class="loader" id="loader-login"></span>
+		<button type="submit">
+			Save
+		</button>
+	</p>
+</form>
+<div id="map-canvas"></div>
+{% endblock %}

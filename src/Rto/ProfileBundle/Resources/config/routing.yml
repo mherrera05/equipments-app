@@ -1,0 +1,12 @@
+Profile_edit:
+  path: /profile/edit
+  defaults: { _controller: RtoProfileBundle:Profile:edit }
+
+# Profile - AJAX
+Profile_update:
+  path: /profile/update
+  defaults: { _controller: RtoProfileBundle:ProfileAjax:update }
+  
+Profile_loadPicture:
+  path: /profile/edit/load-picture
+  defaults: { _controller: RtoProfileBundle:ProfileAjax:loadPicture }

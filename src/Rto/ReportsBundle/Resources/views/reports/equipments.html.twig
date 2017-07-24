@@ -1,0 +1,72 @@
+{% extends "RtoCoreBundle:layout:index.html.twig" %}
+
+{% block  title %}
+General Report
+{% endblock %}
+
+{% block css %}
+<link href="{{asset('bundles/rtocore/js/jquery-datatable/media/css/jquery.dataTables.min.css')}}" type="text/css" rel="stylesheet">
+<link href="{{asset('bundles/rtoreports/css/jquery.jqplot.min.css')}}" type="text/css" rel="stylesheet">
+{% endblock %}
+
+{% block vars %}
+<script type="text/javascript">
+	var addressReportsEquipmentsProject = '{{path('Reports_equipmentsProject')}}';
+	var data, plot5 = '';
+</script>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{{asset('bundles/rtoreports/js/jquery.jqplot.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/rtoreports/js/plugins/jqplot.barRenderer.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/rtoreports/js/plugins/jqplot.categoryAxisRenderer.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/rtoreports/js/plugins/jqplot.pointLabels.min.js')}}"></script>
+<script type="text/javascript" >
+	ticks  = [{% for row in ticks %}{% if loop.index == 1 %}'{{row}}'{% else %},'{{row}}'{% endif%}{% endfor%}];
+	serie1 = [{% for row in serie1 %}{% if loop.index == 1 %}'{{row}}'{% else %},'{{row}}'{% endif%}{% endfor%}];
+	serie2 = [{% for row in serie2 %}{% if loop.index == 1 %}'{{row}}'{% else %},'{{row}}'{% endif%}{% endfor%}];
+	data   = [{% for row in participations %}{% if loop.index == 1 %}['{{row[0]}}','{{row[1]}}']{% else %},['{{row[0]}}','{{row[1]}}']{% endif%}{% endfor%}];
+</script>
+<script type="text/javascript" src="{{asset('bundles/rtoreports/js/generalReport.min.js')}}"></script>
+{% endblock %}
+
+{% block expand %}
+content-max-size
+{% endblock %}
+
+{% block  content %}
+<div>
+	General Report
+</div>
+<p>
+	<label for="projects">Projects</label>
+	<select name="projects" id="projects">
+		<option value="">Choose</option>
+		{% for element in projects %}
+		<option value="{{element.project.id}}">{{element.project.name}}</option>
+		{% endfor %}
+	</select>
+	<span class="loader" id="loader-projects-equipments"></span>
+</p>
+<div class="clear"></div>
+<div id="pie3"></div>
+<div class="over-time">
+	<div class="title">Forgotten Equipments</div>
+	<ul>
+		<li>Days</li><li>Description</li><li>Locations</li><li>Project</li><li>Installed by</li>
+	</ul>
+	{% for element in installed|slice(0,10) %}
+	<ul >
+		<li class="{% if element.days > 15 %}overpass{% endif %}">{{element.days}}</li><li><a href="{{path('Equipments_viewEquipment', {'id': element.equip})}}">{{element.serial}} - {{element.type}}- {{element.model}}</a></li><li>{{element.location}}</li><li>{{element.project}}</li><li>{{element.Uname}} {{element.Ulastname}}</li>
+	</ul>
+	{% endfor %}
+</div>
+<div class="clear"></div>
+<div class="over-time">
+	<div class="title">Participation</div>
+<div id="bar1"></div>
+<div class="clear"></div>
+
+
+	
+{% endblock %}

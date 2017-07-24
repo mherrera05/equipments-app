@@ -1,0 +1,6 @@
+<ul >
+	<li class="title">Projects Registered</li>
+	<li class="content">{{count}} project{% if data > 0 %}s{% endif %} registered</li>
+	<li class="title">Last Project Registered</li>
+	<li class="content">{% if count > 0 %}{{data[count-1].project.name}}{% endif %} </li>
+</ul>

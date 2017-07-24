@@ -1,0 +1,8 @@
+Reports_equipments:
+    path:     /reports-equipments
+    defaults: { _controller: RtoReportsBundle:Reports:equipments }
+
+#AJAX
+Reports_equipmentsProject:
+  path:     /reports-equipments/equipments
+  defaults: { _controller: RtoReportsBundle:ReportsAjax:equipmentsProject }

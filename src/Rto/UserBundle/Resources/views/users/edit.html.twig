@@ -1,0 +1,70 @@
+{% extends "RtoCoreBundle:layout:index.html.twig" %}
+
+{% block  title %}
+Users
+{% endblock %}
+
+{% block vars %}
+<script type="text/javascript">
+	var addressUpdateUser      = '{{path('User_updateUser')}}';
+	var addressSearchEmail     = '{{path('User_searchEmail')}}';
+	var addressSearchUserId    = '{{path('User_searchUserId')}}';
+</script>
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{{asset('bundles/rtouser/js/users/edit.min.js')}}"></script>
+{% endblock %}
+
+{% block  content %}
+<div>
+	Users
+</div>
+<form method="POST" name="form" id="form" onsubmit="return false;">
+	<p>
+		<label for="name">Name: </label>
+		<input type="hidden" name="id" id="id" value="{{data.id}}" >
+		<input type="text" name="name" id="name" required value="{{data.name}}">
+	</p>
+	<p>
+		<label for="lastname">Last Name: </label>
+		<input type="text" name="lastname" id="last-name" required value="{{data.lastname}}" >
+	</p>
+	<p>
+		<label for="userid">User ID: </label>
+		<input type="text" name="userid" id="user-id" required value="{{data.userid}}" >
+		<input type="hidden" name="olduserid" id="old-user-id" required readonly value="{{data.userid}}" >
+	</p>
+	<p>
+		<label for="email">E-mail: </label>
+		<input type="email" name="email" id="email" required value="{{data.email}}" >
+		<input type="hidden" name="oldemail" id="old-email" required readonly value="{{data.email}}" >
+	</p>
+	<p>
+		<label for="role">Role: </label>
+		<select name="role" id="role">
+			<option> Choose..</option>
+			<option value="ROLE_OPERATOR" {% if data.role == 'ROLE_OPERATOR' %}selected{% endif %}>Operator</option>
+			<option value="ROLE_COORD" {% if data.role == 'ROLE_COORD' %}selected{% endif %}>Coordinator / Manager</option>
+			<option value="ROLE_ADMIN" {% if data.role == 'ROLE_ADMIN' %}selected{% endif %}>Administrator</option>
+		</select>
+	</p>
+	<p>
+		<label for="state">State: </label>
+		<select name="state" id="state">
+			<option> Choose..</option>
+			<option value="1" {% if data.active == true %}selected{% endif %}>Enable Account</option>
+			<option value="0" {% if data.active == false %}selected{% endif %}>Disabled Account</option>
+		</select>
+	</p>
+	<p>
+		<span class="loader" id="loader-login"></span>
+		<button type="submit">
+			Save
+		</button>
+	</p>
+</form>
+{% endblock %}

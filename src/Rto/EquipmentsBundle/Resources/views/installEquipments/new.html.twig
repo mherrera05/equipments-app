@@ -1,0 +1,120 @@
+{% extends "RtoCoreBundle:layout:index.html.twig" %}
+
+{% block  title %}
+Install Equipments
+{% endblock %}
+
+{% block vars %}
+<script type="text/javascript">
+	var addressLoadDetails 			   = '{{path('Equipments_loadDetails')}}';
+	var addressSearchLocation          = '{{path('Equipments_searchLocation')}}';
+	var addressSearchEquipment         = '{{path('Equipments_searchEquipment')}}';
+	var addressCreateInstallEquipments = '{{path('Equipments_createInstallEquipments')}}';
+	var elements			           = serials = new Array();
+	var i					           = 0;		
+</script>
+{% endblock %}
+
+{% block css %}
+<link href="{{asset('bundles/rtocore/css/jquery-ui.min.css')}}" type="text/css" rel="stylesheet">
+<link href="{{asset('bundles/rtocore/css/jquery-ui.structure.min.css')}}" type="text/css" rel="stylesheet">
+<link href="{{asset('bundles/rtoequipments/js/jquery-multiselect/css/multi-select.min.css')}}" type="text/css" rel="stylesheet">
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{{asset('bundles/rtocore/js/jquery-ui.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/rtoequipments/js/jquery-multiselect/js/jquery.multi-select.min.js')}}"></script>
+<script type="text/javascript">
+	serials = [{% for element in serials %}{% if loop.index == 1 %}'{{element.equip.serial}}'{% else %},'{{element.equip.serial}}'{% endif %}{% endfor %}];
+</script>
+<script type="text/javascript" src="{{asset('bundles/rtoequipments/js/installEquipments/new.min.js')}}"></script>
+{% endblock %}
+
+{% block  content %}
+<div>
+	Install Equipments
+</div>
+<form method="POST" name="form" id="form" class="install" onsubmit="return false;">
+	<p>
+		<label for="date">Date: </label>
+		<input type="text" name="date" id="date" required value='{{ "now"|date("Y-m-d") }}'>
+	</p>
+	<p>
+		<label for="project">Project: </label>
+		<select name="project" id="project" required>
+			<option value="">Choose..</option>
+			{% for element in projects %}
+			<option value="{{element.project.id}}">{{element.project.name}}</option>
+			{% endfor %}
+		</select>
+	</p>
+	<p>
+		<label for="location">Location: </label>
+		<select name="location" id="location" required disabled>
+			<option value="">Choose..</option>
+		</select>
+		<span class="loader" id="loader-model"></span>
+	</p>
+	<p>
+		<label for="responsable">Responsable: </label>
+		<select name="responsable" id="responsable" required>
+			<option value="">Choose..</option>
+			{% for element in users %}
+			<option value="{{element.user.id}}" {% if element.user.id == app.session.get('user').id %}selected{% endif %}>{{element.user.userid}} - {{element.user.name}} {{element.user.lastname}}</option>
+			{% endfor %}
+		</select>
+	</p>
+	<p>
+		<label for="state">State: </label>
+		<select name="state" id="state" required>
+			<option value="0" selected>To do</option>
+			<option value="1">Done</option>
+		</select>
+	</p>
+	<p>
+		<label for="serial">Serial: </label>
+		<input type="text" name="serial" id="serial" placeholder="Type serial code here..">
+		<span class="loader" id="loader-serial"></span>
+	</p>
+	
+	<div id="equipments">
+		<ul>
+			<li>Serial</li><li>Equipment</li><li>Model</li><li></li>
+		</ul>
+	</div>
+	<p>
+		<label for="comments">Comments / Others Devices: </label>
+		<textarea name="comments" id="comments"></textarea>
+	</p>
+	<p id="notify">
+		<label >Notify to:</label>
+	</p>
+	<div id="notify" class="multi-select">
+		<a href='#' id='select-all'>select all</a> / 
+		<a href='#' id='deselect-all'>deselect all</a>
+		<select id='refer' multiple='multiple' name="refer[]" >
+			{% for element in users %}
+				{% if element.user.role != "ROLE_ADMIN" %}
+					<option value="{{element.user.email}}">{{element.user.name}} {{element.user.lastname}}</option>
+				{% endif %}
+			{% endfor %}
+		</select>
+	</div>
+	<p>
+		<span class="loader" id="loader-login"></span>
+		<button type="submit">
+			Save
+		</button>
+	</p>
+</form>
+{% endblock %}
+
+{% block widget %}
+<section>
+	<div>Information
+	</div>
+	<ul>
+		<li class="title">Point selected</li>
+	</ul>
+</section>
+{% endblock %}

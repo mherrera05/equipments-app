@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Uninstallations" table="uninstallations">
+    <indexes>
+      <index name="fk_uninstallations_users1_idx" columns="users_id"/>
+      <index name="fk_uninstallations_locations1_idx" columns="locations_id"/>
+    </indexes>
+    <unique-constraints>
+      <unique-constraint name="id_UNIQUE" columns="id"/>
+    </unique-constraints>
+    <id name="id" type="bigint" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="state" type="boolean" column="state" nullable="false"/>
+    <field name="date" type="datetime" column="date" nullable="false"/>
+    <field name="dateRegistered" type="datetime" column="date_registered" nullable="false"/>
+    <field name="comments" type="text" column="comments" nullable="true"/>
+    <many-to-one field="users" target-entity="Users">
+      <join-columns>
+        <join-column name="users_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="locations" target-entity="Locations">
+      <join-columns>
+        <join-column name="locations_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

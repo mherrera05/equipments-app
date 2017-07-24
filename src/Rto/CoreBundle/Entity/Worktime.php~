@@ -1,0 +1,59 @@
+<?php
+
+namespace Rto\CoreBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Worktime
+ *
+ * @ORM\Table(name="worktime", uniqueConstraints={@ORM\UniqueConstraint(name="id_UNIQUE", columns={"id"})}, indexes={@ORM\Index(name="fk_worktime_locations1_idx", columns={"locations_id"}), @ORM\Index(name="fk_worktime_users1_idx", columns={"users_id"})})
+ * @ORM\Entity
+ */
+class Worktime
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="bigint", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="start_date", type="datetime", nullable=false)
+     */
+    private $startDate;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="end_date", type="datetime", nullable=true)
+     */
+    private $endDate;
+
+    /**
+     * @var \Locations
+     *
+     * @ORM\ManyToOne(targetEntity="Locations")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="locations_id", referencedColumnName="id")
+     * })
+     */
+    private $locations;
+
+    /**
+     * @var \Users
+     *
+     * @ORM\ManyToOne(targetEntity="Users")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="users_id", referencedColumnName="id")
+     * })
+     */
+    private $users;
+
+
+}

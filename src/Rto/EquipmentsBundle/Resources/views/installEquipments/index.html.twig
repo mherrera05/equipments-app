@@ -1,0 +1,53 @@
+{% extends "RtoCoreBundle:layout:index.html.twig" %}
+
+{% block  title %}
+Installations
+{% endblock %}
+
+{% block css %}
+<link href="{{asset('bundles/rtocore/js/jquery-datatable/media/css/jquery.dataTables.min.css')}}" type="text/css" rel="stylesheet">
+<link href="{{asset('bundles/rtocore/js/jquery-datatable/extensions/TableTools/css/dataTables.tableTools.min.css')}}" type="text/css" rel="stylesheet">
+{% endblock %}
+
+{% block vars %}
+<script type="text/javascript">
+	var addressCompleteInstallation = '{{path('Equipments_completeInstallation')}}';
+	var addressDeleteInstallation   = '{{path('Equipments_deleteInstallation')}}';
+</script>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{{asset('bundles/rtocore/js/jquery-datatable/media/js/jquery.dataTables.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/rtocore/js/jquery-datatable/extensions/TableTools/js/dataTables.tableTools.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/rtoequipments/js/installEquipments/index.min.js')}}"></script>
+{% endblock %}
+
+{% block  content %}
+<div>
+	Installations
+</div>
+<p>
+	<button type="button" class="new-button" route="{{url}}">New Installation </button>
+</p>
+<div class="clear"></div>
+	<table id="installations">
+		<thead>
+			<tr>
+				<td>#</td><td width="20%">Created</td><td>Location</td><td>Created By</td><td>Size</td><td>State</td><td>Operations</td>
+			</tr>
+		</thead>
+		<tbody>
+			{% for row in data %}
+			<tr id="row-{{row.installation.id}}" {% if row.installation.state == 1 %}class="done"{% endif %}>
+				<td>#{{row.installation.id}} </td>
+				<td>{{row.installation.date | date("d-m-Y")}} </td>
+				<td>{{row.installation.locations.typeLocations.name}} {{row.installation.locations.name}} </td>
+				<td>{{row.installation.users.name}} {{row.installation.users.lastname}} </td>
+				<td><a class='point-tooltip' href="javascript::void(0)">{{row.count}}</a>{% if row.count != 0 %}<div class="cssarrow"><ul> {% for element in row.relations %}<li> {{element.equipments.models.brands.name}} {{element.equipments.models.name}}</li> {% endfor %}</ul></div>{% endif %} </td>
+				<td>{% if row.installation.state == 0 %}{% if app.user.id == row.installation.users.id %}<a href="javascript::void(0)" class='complete-installation' pk='{{row.installation.id}}'>To do</a> <span class="loader" id="loader-done"></span>{% endif %} {% else %} Done {% endif %}</td>
+				<td><a href="{{row.view}}">View</a> {% if row.installation.state == 0 %}{% if app.user.id == row.installation.users.id %}<a href="javascript:void(0)" class="delete" id="delete-{{row.installation.id}}" pk="{{row.installation.id}}">Delete</a>{% endif %}{% endif %}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

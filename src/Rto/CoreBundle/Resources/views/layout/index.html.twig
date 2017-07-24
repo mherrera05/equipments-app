@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html ng-app="buttonApp">
+	<head>
+		<link href="{{asset('bundles/rtocore/css/style.css')}}" type="text/css" rel="stylesheet">
+		<link href="{{asset('bundles/rtocore/css/angular/angular-material.min.css')}}" type="text/css" rel="stylesheet">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		{% block css %}
+		{% endblock %}
+		{% block  vars %}
+		{% endblock %}
+		<title>APP - {% block title %}{% endblock %}</title>
+	</head>
+	<body >
+		
+		<div class="content-modal">
+			<div class="modal">
+				<div class="close">X close</div>
+				<div class="title">Do you want to delete?</div>
+				<div class="body">
+					<p>
+						<input type='button' id="delete" value="Yes"><input type="button" id="close" value="No">
+					</p>
+				</div>
+			</div>
+			<div class="modal-camera">
+				<div class="close">X close</div>
+				<div class="source" id="source">
+					
+				</div>
+				<div class="options">
+					<button id="camera-cancel">Cancel</button>
+					<button id="camera-config">Config.</button>
+					<span class="loader" id="loader-upload-camera"></span><button id="camera-upload">Upload</button>
+					<button id="camera-take">Take</button>
+				</div>
+			</div>
+		</div>
+		<div class="side-bar">
+			<div >{% render (controller('RtoCoreBundle:Core:system')) %}</div>
+			<div >
+				<img width="24" height="24" src="{{asset('bundles/rtocore/images/help.png')}}">
+				<span> Help</span>
+			</div>
+			<div>
+				<div>
+				{% block help %}
+				{% endblock %}
+				</div>
+			</div>
+		</div>
+		<header>
+			<section>
+				<div>
+					{% block logo %}
+					{% render (controller('RtoCoreBundle:Core:logo')) %}
+					{% endblock %}
+				</div>
+				<nav>
+					<ul>
+						{% block menu %}
+						{% render (controller('RtoCoreBundle:Core:menu')) %}
+						{% endblock %}
+					</ul>
+				</nav>
+				<div>
+					{% block profile %}
+					{% render (controller('RtoCoreBundle:Core:profile')) %}
+					{% endblock %}
+				</div>
+			</section>
+		</header>
+		<section id="content" class="content">
+			<section>
+				<section class="inner {% block expand %}{% endblock %}">
+					{% block content %}
+					<div>
+						Actividades Recientes
+					</div>
+					<ul>
+						<li>
+							<p>Instalacion de Equipos en Taladro PTX - 4</p>
+							<p>Instalacion realizado por Miguel Herrera, <span>registrado 18/07/2014 </span></p>
+						</li>
+						<li>
+							<p>Miguel Herrera ha accesado al Sistema</p>
+							<p>Evento de acceso, <span>registrado 18/07/2014 </span></p>
+						</li>
+						<li>
+							<p>Instalacion de Equipos en Taladro PTX - 4</p>
+							<p>Instalacion realizado por Miguel Herrera, <span>registrado 18/07/2014 </span></p>
+						</li>
+						<li>
+							<p>Miguel Herrera ha accesado al Sistema</p>
+							<p>Evento de acceso, <span>registrado 18/07/2014 </span></p>
+						</li>
+						<li>
+							<p>Instalacion de Equipos en Taladro PTX - 4</p>
+							<p>Instalacion realizado por Miguel Herrera, <span>registrado 18/07/2014 </span></p>
+						</li>
+						<li>
+							<p>Miguel Herrera ha accesado al Sistema</p>
+							<p>Evento de acceso, <span>registrado 18/07/2014 </span></p>
+						</li>
+						<li>
+							<p>Instalacion de Equipos en Taladro PTX - 4</p>
+							<p>Instalacion realizado por Miguel Herrera, <span>registrado 18/07/2014 </span></p>
+						</li>
+						<li>
+							<p>Miguel Herrera ha accesado al Sistema</p>
+							<p>Evento de acceso, <span>registrado 18/07/2014 </span></p>
+						</li>
+						<li>
+							<p>Instalacion de Equipos en Taladro PTX - 4</p>
+							<p>Instalacion realizado por Miguel Herrera, <span>registrado 18/07/2014 </span></p>
+						</li>
+						<li>
+							<p>Miguel Herrera ha accesado al Sistema</p>
+							<p>Evento de acceso, <span>registrado 18/07/2014 </span></p>
+						</li>
+						<li>
+							<p>Instalacion de Equipos en Taladro PTX - 4</p>
+							<p>Instalacion realizado por Miguel Herrera, <span>registrado 18/07/2014 </span></p>
+						</li>
+						<li>
+							<p>Miguel Herrera ha accesado al Sistema</p>
+							<p>Evento de acceso, <span>registrado 18/07/2014 </span></p>
+						</li>
+					</ul>
+					{% endblock %}
+				</section>
+				{% block widget %}
+				<!--<section>
+					<div>
+						Actividades Recientes
+					</div> 
+				</section>-->
+				{% endblock %}
+			</section>
+			<div ng-controller="button as Button"  class="lock-size" layout-align="center center" id="center-button" >
+				      <md-fab-speed-dial md-open="Button.isOpen" md-direction="down"
+				                         ng-class="Button.selectedMode">
+				        <md-fab-trigger >
+				          <md-button aria-label="menu" class="md-fab md-warn">
+				            <img width="24" height="24" src="{{asset('bundles/rtocore/images/menu-fab.png')}}">
+				          </md-button>
+				        </md-fab-trigger>
+				        <md-fab-actions>
+				          <md-button aria-label="Location" class="md-fab md-raised md-mini">
+				            <a href="{{path('Admin_newLocation')}}"> <img width="20" height="20" src="{{asset('bundles/rtocore/images/location.png')}}"></a>
+				          </md-button>
+				          <md-button aria-label="Facebook" class="md-fab md-raised md-mini">
+				            <a href="{{path('Equipments_newEquipment')}}"> <img width="20" height="20" src="{{asset('bundles/rtocore/images/equip.png')}}"></a>
+				          </md-button>
+				          <md-button aria-label="Google Hangout" class="md-fab md-raised md-mini">
+				            <a href="{{path('Equipments_installEquipments')}}"> <img width="20" height="20" src="{{asset('bundles/rtocore/images/installation.png')}}"></a>
+				          </md-button>
+				          <md-button aria-label="Google Hangout" class="md-fab md-raised md-mini">
+				            <a href="{{path('Equipments_uninstallEquipments')}}"> <img width="20" height="20" src="{{asset('bundles/rtocore/images/uninstallation.png')}}"></a>
+				          </md-button>
+				        </md-fab-actions>
+				      </md-fab-speed-dial>
+				    </div>
+		<div class="alert">
+			Information message to user!!
+		</div>
+		<footer>
+			&copy; Copyrigth 2014 | Contact: Miguel Herrera - migueljherrera@gmail.com
+		</footer>
+		 
+	</body>
+		<script type="text/javascript" src="{{asset('bundles/rtocore/js/jquery.min.js')}}"></script>
+		<script type="text/javascript" src="{{asset('bundles/rtocore/js/jquery-ui.min.js')}}"></script>
+		<script type="text/javascript" src="{{asset('bundles/rtocore/js/angular/angular.min.js')}}"></script>
+		<script type="text/javascript" src="{{asset('bundles/rtocore/js/angular/angular-animate.min.js')}}"></script>
+		<script type="text/javascript" src="{{asset('bundles/rtocore/js/angular/angular-aria.min.js')}}"></script>
+		<script type="text/javascript" src="{{asset('bundles/rtocore/js/angular/angular-messages.min.js')}}"></script>
+		<script type="text/javascript" src="{{asset('bundles/rtocore/js/angular/angular-material.min.js')}}"></script>
+		<script type="text/javascript" src="{{asset('bundles/rtocore/js/core.min.js')}}"></script>
+		{% block js %}
+		{% endblock %}
+</html>

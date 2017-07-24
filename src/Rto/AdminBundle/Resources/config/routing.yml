@@ -1,0 +1,163 @@
+#Type Equipments
+Admin_typeEquipments:
+  path: /admin/type-equipments
+  defaults: { _controller: RtoAdminBundle:Admin:typeEquipments }
+
+Admin_newTypeEquipments:
+  path: /admin/type-equipments/new
+  defaults: { _controller: RtoAdminBundle:Admin:newTypeEquipments } 
+  
+Admin_editTypeEquipments:
+  path: /admin/type-equipments/edit/{id}
+  defaults: { _controller: RtoAdminBundle:Admin:editTypeEquipments } 
+
+#Brands
+Admin_brands:
+  path: /admin/brands
+  defaults: { _controller: RtoAdminBundle:Admin:brands }
+  
+Admin_newBrand:
+  path: /admin/brands/new
+  defaults: { _controller: RtoAdminBundle:Admin:newBrand } 
+  
+Admin_editBrand:
+  path: /admin/brands/edit/{id}
+  defaults: { _controller: RtoAdminBundle:Admin:editBrand } 
+
+#Models
+Admin_models:
+  path: /admin/models
+  defaults: { _controller: RtoAdminBundle:Admin:models }
+  
+Admin_newModel:
+  path: /admin/models/new
+  defaults: { _controller: RtoAdminBundle:Admin:newModel }
+  
+Admin_editModel:
+  path: /admin/models/edit/{id}
+  defaults: { _controller: RtoAdminBundle:Admin:editModel }
+
+#Projects
+Admin_projects:
+  path: /admin/projects
+  defaults: { _controller: RtoAdminBundle:Admin:projects }
+
+Admin_newProject:
+  path: /admin/projects/new
+  defaults: { _controller: RtoAdminBundle:Admin:newProject }
+
+Admin_editProject:
+  path: /admin/projects/edit/{id}
+  defaults: { _controller: RtoAdminBundle:Admin:editProject }
+
+Projects_view:
+  path: /projects/view/{id}
+  defaults: { _controller: RtoAdminBundle:Admin:viewProject }
+  
+#Type Locations
+Admin_typeLocations:
+  path: /admin/type-locations
+  defaults: { _controller: RtoAdminBundle:Admin:typeLocations }
+
+Admin_newTypeLocations:
+  path: /admin/type-locations/new
+  defaults: { _controller: RtoAdminBundle:Admin:newTypeLocations }
+ 
+Admin_editTypeLocations:
+  path: /admin/type-locations/edit/{id}
+  defaults: { _controller: RtoAdminBundle:Admin:editTypeLocations }
+
+#Locations
+Admin_locations:
+  path: /locations
+  defaults: { _controller: RtoAdminBundle:Admin:locations }
+  
+Admin_newLocation:
+  path: /locations/new
+  defaults: { _controller: RtoAdminBundle:Admin:newLocation }
+
+Admin_editLocation:
+  path: /locations/edit/{id}
+  defaults: { _controller: RtoAdminBundle:Admin:editLocation }
+
+#Type Equipments - Ajax
+Admin_deleteTypeEquipments:
+  path: /admin/type-equipments/delete
+  defaults: { _controller: RtoAdminBundle:AdminAjax:deleteTypeEquipments }
+
+Admin_createTypeEquipments:
+  path: /admin/type-equipments/create
+  defaults: { _controller: RtoAdminBundle:AdminAjax:createTypeEquipments }
+  
+Admin_updateTypeEquipments:
+  path: /admin/type-equipments/update
+  defaults: { _controller: RtoAdminBundle:AdminAjax:updateTypeEquipments }
+
+#Brands - Ajax
+Admin_createBrand:
+  path: /admin/brands/create
+  defaults: { _controller: RtoAdminBundle:AdminAjax:createBrand }
+
+Admin_updateBrand:
+  path: /admin/brands/update
+  defaults: { _controller: RtoAdminBundle:AdminAjax:updateBrand }
+
+Admin_deleteBrand:
+  path: /admin/brands/delete
+  defaults: { _controller: RtoAdminBundle:AdminAjax:deleteBrand }
+
+#Models - Ajax
+Admin_createModel:
+  path: /admin/models/create
+  defaults: { _controller: RtoAdminBundle:AdminAjax:createModel }
+  
+Admin_updateModel:
+  path: /admin/models/update
+  defaults: { _controller: RtoAdminBundle:AdminAjax:updateModel }
+  
+Admin_deleteModel:
+  path: /admin/models/delete
+  defaults: { _controller: RtoAdminBundle:AdminAjax:deleteModel }
+
+#Projects - Ajax
+Admin_createProject:
+  path: /admin/projects/create
+  defaults: { _controller: RtoAdminBundle:AdminAjax:createProject }
+
+Admin_updateProject:
+  path: /admin/projects/update
+  defaults: { _controller: RtoAdminBundle:AdminAjax:updateProject }
+
+Admin_deleteProject:
+  path: /admin/projects/delete
+  defaults: { _controller: RtoAdminBundle:AdminAjax:deleteProject }
+
+Admin_searchProject:
+  path: /admin/projects/search-projects
+  defaults: { _controller: RtoAdminBundle:AdminAjax:searchProject }
+
+#Type Locations - Ajax
+Admin_createTypeLocations:
+  path: /admin/type-locations/create
+  defaults: { _controller: RtoAdminBundle:AdminAjax:createTypeLocations }
+
+Admin_updateTypeLocations:
+  path: /admin/type-locations/update
+  defaults: { _controller: RtoAdminBundle:AdminAjax:updateTypeLocations }  
+
+Admin_deleteTypeLocations:
+  path: /admin/type-locations/delete
+  defaults: { _controller: RtoAdminBundle:AdminAjax:deleteTypeLocations }
+
+#Locations - Ajax
+Admin_createLocation:
+  path: /locations/create
+  defaults: { _controller: RtoAdminBundle:AdminAjax:createLocation }
+
+Admin_updateLocation:
+  path: /locations/update
+  defaults: { _controller: RtoAdminBundle:AdminAjax:updateLocation }
+  
+Admin_deleteLocation:
+  path: /locations/delete
+  defaults: { _controller: RtoAdminBundle:AdminAjax:deleteLocation }

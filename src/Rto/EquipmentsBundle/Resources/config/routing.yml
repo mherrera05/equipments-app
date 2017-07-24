@@ -1,0 +1,116 @@
+Equipments_start:
+  path: /equipments
+  defaults: { _controller: RtoEquipmentsBundle:Equipments:equipments }
+
+Equipments_newEquipment:
+  path: /equipments/new
+  defaults: { _controller: RtoEquipmentsBundle:Equipments:newEquipment }
+
+Equipments_editEquipment:
+  path: /equipments/edit/{id}
+  defaults: { _controller: RtoEquipmentsBundle:Equipments:editEquipment }
+ 
+Equipments_viewEquipment:
+  path: /equipments/view/{id}
+  defaults: { _controller: RtoEquipmentsBundle:Equipments:viewEquipment }
+ 
+Equipments_installations:
+  path: /equipments/installations
+  defaults: { _controller: RtoEquipmentsBundle:Equipments:installations }
+
+Equipments_installEquipments:
+  path: /equipments/install-equipments
+  defaults: { _controller: RtoEquipmentsBundle:Equipments:installEquipments }
+
+Equipments_viewInstallation:
+  path: /equipments/installations/{id}
+  defaults: { _controller: RtoEquipmentsBundle:Equipments:viewInstallation }
+
+Equipments_locateEquipments:
+  path: /equipments/locate
+  defaults: { _controller: RtoEquipmentsBundle:Equipments:locateEquipments }
+
+Equipments_uninstallations:
+  path: /equipments/uninstallations
+  defaults: { _controller: RtoEquipmentsBundle:Equipments:uninstallations }
+
+Equipments_uninstallEquipments:
+  path: /equipments/uninstall-equipments
+  defaults: { _controller: RtoEquipmentsBundle:Equipments:uninstallEquipments }
+  
+Equipments_viewUninstallation:
+  path: /equipments/uninstallations/{id}
+  defaults: { _controller: RtoEquipmentsBundle:Equipments:viewUninstallation }
+  
+Equipments_reports:
+  path: /equipments/reports
+  defaults: { _controller: RtoEquipmentsBundle:Equipments:reports }
+  
+#Ajax
+Equipments_createEquipment:
+  path: /equipments/create
+  defaults: { _controller: RtoEquipmentsBundle:EquipmentsAjax:createEquipment }
+
+Equipments_updateEquipment:
+  path: /equipments/update
+  defaults: { _controller: RtoEquipmentsBundle:EquipmentsAjax:updateEquipment }
+
+Equipments_deleteEquipment:
+  path: /equipments/delete
+  defaults: { _controller: RtoEquipmentsBundle:EquipmentsAjax:deleteEquipment }
+
+Equipments_searchModels:
+  path: /equipments/search-models
+  defaults: { _controller: RtoEquipmentsBundle:EquipmentsAjax:searchModels }
+
+Equipments_searchSerial:
+  path: /equipments/search-serial
+  defaults: { _controller: RtoEquipmentsBundle:EquipmentsAjax:searchSerial }
+
+Equipments_searchMac:
+  path: /equipments/search-mac
+  defaults: { _controller: RtoEquipmentsBundle:EquipmentsAjax:searchMac }
+  
+Equipments_searchLocation:
+  path: /equipments/search-location
+  defaults: { _controller: RtoEquipmentsBundle:EquipmentsAjax:searchLocation }
+
+Equipments_searchEquipment:
+  path: /equipments/search-equipment
+  defaults: { _controller: RtoEquipmentsBundle:EquipmentsAjax:searchEquipment }
+
+Equipments_createInstallEquipments:
+  path: /equipments/install-equipments/create
+  defaults: { _controller: RtoEquipmentsBundle:EquipmentsAjax:createInstallEquipments }
+
+Equipments_loadDetails:
+  path: /equipments/load-details
+  defaults: { _controller: RtoEquipmentsBundle:EquipmentsAjax:loadDetails }
+
+Equipments_createUninstallation:
+  path: /equipments/uninstall-equipments/create
+  defaults: { _controller: RtoEquipmentsBundle:EquipmentsAjax:createUninstallation }
+
+Equipments_completeInstallation:
+  path: /equipmets/install-equipments/complete
+  defaults: { _controller: RtoEquipmentsBundle:EquipmentsAjax:completeInstallation }
+
+Equipments_completeUninstallation:
+  path: /equipments/uninstall-equipments/complete
+  defaults: { _controller: RtoEquipmentsBundle:EquipmentsAjax:completeUninstallation }
+  
+Equipments_deleteInstallation:
+  path: /equipments/install-equipments/delete
+  defaults: { _controller: RtoEquipmentsBundle:EquipmentsAjax:deleteInstallEquipments }
+
+Equipments_deleteUninstallation:
+  path: /equipments/uninstall-equipments/delete
+  defaults: { _controller: RtoEquipmentsBundle:EquipmentsAjax:deleteUninstallEquipments }
+
+Equipments_searchLocationTypeEquipments:
+  path: /equipments/locate/search-location-typeEquipments
+  defaults: { _controller: RtoEquipmentsBundle:EquipmentsAjax:searchLocationTypeEquipments }
+  
+Equipments_getReport:
+  path: /equipments/get-report
+  defaults: { _controller: RtoEquipmentsBundle:EquipmentsAjax:getReport }

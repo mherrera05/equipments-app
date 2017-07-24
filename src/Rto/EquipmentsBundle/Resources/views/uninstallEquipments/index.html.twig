@@ -1,0 +1,53 @@
+{% extends "RtoCoreBundle:layout:index.html.twig" %}
+
+{% block  title %}
+Uninstallations
+{% endblock %}
+
+{% block css %}
+<link href="{{asset('bundles/rtocore/js/jquery-datatable/media/css/jquery.dataTables.min.css')}}" type="text/css" rel="stylesheet">
+<link href="{{asset('bundles/rtocore/js/jquery-datatable/extensions/TableTools/css/dataTables.tableTools.min.css')}}" type="text/css" rel="stylesheet">
+{% endblock %}
+
+{% block vars %}
+<script type="text/javascript">
+	var addressCompleteUninstallation = '{{path('Equipments_completeUninstallation')}}';
+	var addressDeleteUninstallation   = '{{path('Equipments_deleteUninstallation')}}';
+</script>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{{asset('bundles/rtocore/js/jquery-datatable/media/js/jquery.dataTables.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/rtocore/js/jquery-datatable/extensions/TableTools/js/dataTables.tableTools.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/rtoequipments/js/uninstallEquipments/index.min.js')}}"></script>
+{% endblock %}
+
+{% block  content %}
+<div>
+	Uninstallations
+</div>
+<p>
+	<button type="button" class="new-button" route="{{url}}">New Uninstallation</button>
+</p>
+<div class="clear"></div>
+	<table id="uninstallations">
+		<thead>
+			<tr>
+				<td>#</td><td width="20%">Created</td><td>Moved to</td><td>Created By</td><td>Size</td><td>State</td><td>Operations</td>
+			</tr>
+		</thead>
+		<tbody>
+			{% for row in data %}
+			<tr id="row-{{row.uninstallation.id}}" {% if row.uninstallation.state == 1 %}class="done"{% endif %}>
+				<td>#{{row.uninstallation.id}}</td>
+				<td>{{row.uninstallation.date | date("d-m-Y")}} </td>
+				<td>{{row.uninstallation.locations.typeLocations.name}} {{row.uninstallation.locations.name}} </td>
+				<td>{{row.uninstallation.users.name}} {{row.uninstallation.users.lastname}} </td>
+				<td><a href="javascript::void(0)" class="point-tooltip">{{row.count}}</a>{% if row.count != 0 %}<div class="cssarrow"><ul> {% for element in row.equipments %}<li> {{element.equipments.models.brands.name}} {{element.equipments.models.name}}</li> {% endfor %}</ul></div>{% endif %} </td>
+				<td>{% if row.uninstallation.state == 0 %}{% if app.user.id == row.uninstallation.users.id %}<a href="javascript::void(0)" class='complete-uninstallation' pk='{{row.uninstallation.id}}'> To do </a> <span class="loader" id="loader-done"></span>{% endif %}{% else %} Done {% endif %}</td>
+				<td><a href="{{row.view}}">View</a>{% if row.uninstallation.state == 0 %}{% if app.user.id == row.uninstallation.users.id %}<a href="javascript:void(0)" class="delete" id="delete-{{row.uninstallation.id}}" pk="{{row.uninstallation.id}}">Delete</a>{% endif %}{% endif %}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

@@ -1,0 +1,28 @@
+rto_reports:
+    resource: "@RtoReportsBundle/Resources/config/routing.yml"
+    prefix:   /
+
+rto_operations:
+    resource: "@RtoOperationsBundle/Resources/config/routing.yml"
+    prefix:   /
+
+rto_equipments:
+    resource: "@RtoEquipmentsBundle/Resources/config/routing.yml"
+    prefix:   /
+
+rto_user:
+    resource: "@RtoUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+rto_profile:
+    resource: "@RtoProfileBundle/Resources/config/routing.yml"
+    prefix:   /
+
+rto_admin:
+    resource: "@RtoAdminBundle/Resources/config/routing.yml"
+    prefix:   /
+
+rto_core:
+    resource: "@RtoCoreBundle/Resources/config/routing.yml"
+    prefix:   /
+

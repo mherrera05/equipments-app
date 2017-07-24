@@ -1,0 +1,84 @@
+{% extends "RtoCoreBundle:layout:index.html.twig" %}
+
+{% block  title %}
+Account
+{% endblock %}
+
+{% block vars %}
+<script type="text/javascript">
+	var data				 = new FormData();
+	var condition 			 = false;
+	var addressUpdateProfile = '{{path('Profile_update')}}';
+	var imageDefault 		 = "{{asset('images/users/default.jpg')}}";
+    var webSource            = '{{asset('bundles/rtoprofile/js/webcam/')}}';
+    var addressUploadCamera  = '{{path('Profile_loadPicture')}}';
+    var webcam;
+    var shootEnabled 		 = false;
+</script>
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{{asset('bundles/rtoprofile/js/webcam/webcam.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('bundles/rtoprofile/js/edit.min.js')}}"></script>
+{% endblock %}
+
+{% block  content %}
+<div>
+	Account
+</div>
+<form method="POST" name="form" id="form" enctype="multipart/form-data" onsubmit="return false;">
+	<div class="picture">
+		<img id="photo" src="{{asset(image)}}">
+		<div >
+			<div >Cambiar Foto <a></a></div>
+			<ul showed="0">
+				<li id="upload-picture">Subir Foto</li>
+				<li id="take-picture">Tomar Foto</li>
+				<li id="delete-picture">Borrar Foto</li>
+			</ul>
+		</div>
+		<input type="file" name="picture" id="picture" />
+		<input type="hidden" name="action" id="action" value="nothing">
+	</div>
+	<p>
+		<label for="name">Name: </label>
+		<input type="text" name="name" id="name" required value="{{user.name}}" disabled >
+	</p>
+	<p>
+		<label for="lastname">Last Name: </label>
+		<input type="text" name="lastname" id="last-name" required value="{{user.lastname}}" disabled >
+	</p>
+	<p>
+		<label for="userid">User ID: </label>
+		<input type="text" name="userid" id="user-id" required value="{{user.userid}}" disabled >
+	</p>
+	<p>
+		<label for="email">E-mail: </label>
+		<input type="email" name="email" id="email" required value="{{user.email}}" disabled >
+	</p>
+	<p>
+		<label for="password">Password: </label>
+		<input type="password" name="password" id="password" required >
+	</p>
+	<p>
+		<label for="re-password">Repeat-Password: </label>
+		<input type="password" name="re-password" id="re-password" required >
+	</p>
+	<p>
+		<label for="role">Role: </label>
+		<input type="text" name="role" id="role" value="{% if user.role == 'ROLE_ADMIN' %}Administrator{% elseif user.role == 'ROLE_COORD' %}Coordinator / Manager{% elseif user.role == 'ROLE_OPERATOR' %}Operator{% endif %}" disabled >
+	</p>
+	<p>
+		Last Update: <span>{{ user.dateupdate is empty ? "" : user.dateupdate|date("d/m/Y") }} </span>
+	</p>
+	<p>
+		<span class="loader" id="loader-login"></span>
+		<button type="submit">
+			Save
+		</button>
+	</p>
+</form>
+{% endblock %}

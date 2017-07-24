@@ -1,0 +1,6 @@
+<ul >
+	<li class="title">Brands Registered</li>
+	<li class="content">{{count}} brand{% if data > 0 %}s{% endif %} registered</li>
+	<li class="title">Last Brand Registered</li>
+	<li class="content">{% if count > 0 %}{{data[count-1].brand.name}} {% endif %}</li>
+</ul>

@@ -1,0 +1,45 @@
+<?php
+
+namespace Rto\CoreBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * EquipmentsInstallation
+ *
+ * @ORM\Table(name="equipments_installation", uniqueConstraints={@ORM\UniqueConstraint(name="id_UNIQUE", columns={"id"})}, indexes={@ORM\Index(name="fk_equipments_installation_equipments1_idx", columns={"equipments_id"}), @ORM\Index(name="fk_equipments_installation_installation1_idx", columns={"installation_id"})})
+ * @ORM\Entity
+ */
+class EquipmentsInstallation
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="bigint", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \Equipments
+     *
+     * @ORM\ManyToOne(targetEntity="Equipments")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="equipments_id", referencedColumnName="id")
+     * })
+     */
+    private $equipments;
+
+    /**
+     * @var \Installations
+     *
+     * @ORM\ManyToOne(targetEntity="Installations")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="installation_id", referencedColumnName="id")
+     * })
+     */
+    private $installation;
+
+
+}

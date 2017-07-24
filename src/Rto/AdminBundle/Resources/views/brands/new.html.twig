@@ -1,0 +1,36 @@
+{% extends "RtoCoreBundle:layout:index.html.twig" %}
+
+{% block  title %}
+Brands
+{% endblock %}
+
+{% block vars %}
+<script type="text/javascript">
+	var addressCreateBrand  = '{{path('Admin_createBrand')}}';
+</script>
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{{asset('bundles/rtoadmin/js/brands/new.min.js')}}"></script>
+{% endblock %}
+
+{% block  content %}
+<div>
+	Brands
+</div>
+<form method="POST" name="form" id="form" onsubmit="return false;">
+	<p>
+		<label for="name">Name: </label>
+		<input type="text" name="name" id="name" required >
+	</p>
+	<p>
+		<span class="loader" id="loader-login"></span>
+		<button type="submit">
+			Save
+		</button>
+	</p>
+</form>
+{% endblock %}

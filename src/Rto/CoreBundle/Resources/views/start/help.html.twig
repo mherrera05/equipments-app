@@ -1,0 +1,15 @@
+{% for row in data %}
+	
+		<p>
+			<span>{{row.title}}</span>{{row.description}}
+		</p>
+	{% if row.list != '' %}
+		<ul>
+			{% for element in row.list %}
+			<li>
+				<span>{{element.title}}</span>{{element.description}}
+			</li>
+			{% endfor%}
+		</ul>
+	{% endif %}
+{% endfor %}
