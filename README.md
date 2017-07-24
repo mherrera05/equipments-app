@@ -1,170 +1,72 @@
-Symfony Standard Edition
+APP System
 ========================
 
-Welcome to the Symfony Standard Edition - a fully-functional Symfony2
-application that you can use as the skeleton for your new applications.
+This is an application developed for an international oil company launched on September 2014, it is based on Symfony 2 and jQuery.
 
-This document contains information on how to download, install, and start
-using Symfony. For a more detailed explanation, see the [Installation][1]
-chapter of the Symfony Documentation.
+As it is a product for a particular customer note that all information and trademarks has been removed and the applicaction simply called APP System, so feel free to change the name.
 
-1) Installing the Standard Edition
+This app has been created to manage equipments and staff, their current positions in differents projects. Within the actions, you can install and uninstall an equipments set in a location, aslo set staff and rotate them.
+
+Instructions
+============
+**1) Clone this project**
+
+You can clone this project just copying the url using
+
+    git clone https://github.com/mherrera05/equipments-app.git <folder-name>
+
 ----------------------------------
+**2) Use composer to install vendors (recommended)**
 
-When it comes to installing the Symfony Standard Edition, you have the
-following options.
+As this project has a composer.json and composer.lock file, you can install vendors running the following command
 
-### Use Composer (*recommended*)
+    composer install
 
-As Symfony uses [Composer][2] to manage its dependencies, the recommended way
-to create a new project is to use it.
+------------------------------------
+**3) Once vendors installation finish**
 
-If you don't have Composer yet, download it following the instructions on
-http://getcomposer.org/ or just run the following command:
+Just miss to give permission to certain folders
 
-    curl -s http://getcomposer.org/installer | php
+    app/cache
+    app/logs
 
-Then, use the `create-project` command to generate a new Symfony application:
+-----------------------------------
+**4) Access via http**
 
-    php composer.phar create-project symfony/framework-standard-edition path/to/install
+If all were OK, you will get the login page
+![login-page](web/images/login-page.png)
 
-Composer will install Symfony and all its dependencies under the
-`path/to/install` directory.
+-----------------------------------
+**5) First user**
 
-### Download an Archive File
+Sadly this app does not have fixtures to load and not even signup page, so to enter you have to create the first user directly on database.
 
-To quickly test Symfony, you can also download an [archive][3] of the Standard
-Edition and unpack it somewhere under your web server root directory.
-
-If you downloaded an archive "without vendors", you also need to install all
-the necessary dependencies. Download composer (see above) and run the
-following command:
-
-    php composer.phar install
-
-2) Checking your System Configuration
--------------------------------------
-
-Before starting coding, make sure that your local system is properly
-configured for Symfony.
-
-Execute the `check.php` script from the command line:
-
-    php app/check.php
-
-The script returns a status code of `0` if all mandatory requirements are met,
-`1` otherwise.
-
-Access the `config.php` script from a browser:
-
-    http://localhost/path/to/symfony/app/web/config.php
-
-If you get any warnings or recommendations, fix them before moving on.
-
-3) Browsing the Demo Application
---------------------------------
-
-Congratulations! You're now ready to use Symfony.
-
-From the `config.php` page, click the "Bypass configuration and go to the
-Welcome page" link to load up your first Symfony page.
-
-You can also use a web-based configurator by clicking on the "Configure your
-Symfony Application online" link of the `config.php` page.
-
-To see a real-live Symfony page in action, access the following page:
-
-    web/app_dev.php/demo/hello/Fabien
-
-4) Getting started with Symfony
--------------------------------
-
-This distribution is meant to be the starting point for your Symfony
-applications, but it also contains some sample code that you can learn from
-and play with.
-
-A great way to start learning Symfony is via the [Quick Tour][4], which will
-take you through all the basic features of Symfony2.
-
-Once you're feeling good, you can move onto reading the official
-[Symfony2 book][5].
-
-A default bundle, `AcmeDemoBundle`, shows you Symfony2 in action. After
-playing with it, you can remove it by following these steps:
-
-  * delete the `src/Acme` directory;
-
-  * remove the routing entry referencing AcmeDemoBundle in `app/config/routing_dev.yml`;
-
-  * remove the AcmeDemoBundle from the registered bundles in `app/AppKernel.php`;
-
-  * remove the `web/bundles/acmedemo` directory;
-
-  * empty the `security.yml` file or tweak the security configuration to fit
-    your needs.
+-----------------------------------
 
 What's inside?
 ---------------
 
-The Symfony Standard Edition is configured with the following defaults:
+Also Symfony composition, this project is separated in various bundles:
 
-  * Twig is the only configured template engine;
 
-  * Doctrine ORM/DBAL is configured;
+  * **Rto/CoreBundle** - The core application to manage layouts, menus, login, etc.
 
-  * Swiftmailer is configured;
+  * **Rto/AdminBundle** - This contain all logic to create the data that will go to use the app. Create a project, locations, brands and type of equipments, etc.
 
-  * Annotations for everything are enabled.
+  * **Rto/EquipmentsBundle** - Dedicated exclusively to equipments management.
 
-It comes pre-configured with the following bundles:
+  * **Rto/OperationsBundle** - Dedicated exclusively to staff management.
 
-  * **FrameworkBundle** - The core Symfony framework bundle
+  * **Rto/ProfileBundle** - This allow the user manage its account.
 
-  * [**SensioFrameworkExtraBundle**][6] - Adds several enhancements, including
-    template and routing annotation capability
+  * **Rto/ReportsBundle** - This bundle generate some reports used on the app.
 
-  * [**DoctrineBundle**][7] - Adds support for the Doctrine ORM
+  * **Rto/UsersBundle** - This bundle allow to manage the application users.
 
-  * [**TwigBundle**][8] - Adds support for the Twig templating engine
+Warning
+===============================
 
-  * [**SecurityBundle**][9] - Adds security by integrating Symfony's security
-    component
+This project can contains some actions considered as bad practices, despite is a functional application and works.
 
-  * [**SwiftmailerBundle**][10] - Adds support for Swiftmailer, a library for
-    sending emails
-
-  * [**MonologBundle**][11] - Adds support for Monolog, a logging library
-
-  * [**AsseticBundle**][12] - Adds support for Assetic, an asset processing
-    library
-
-  * **WebProfilerBundle** (in dev/test env) - Adds profiling functionality and
-    the web debug toolbar
-
-  * **SensioDistributionBundle** (in dev/test env) - Adds functionality for
-    configuring and working with Symfony distributions
-
-  * [**SensioGeneratorBundle**][13] (in dev/test env) - Adds code generation
-    capabilities
-
-  * **AcmeDemoBundle** (in dev/test env) - A demo bundle with some example
-    code
-
-All libraries and bundles included in the Symfony Standard Edition are
-released under the MIT or BSD license.
 
 Enjoy!
-
-[1]:  http://symfony.com/doc/2.3/book/installation.html
-[2]:  http://getcomposer.org/
-[3]:  http://symfony.com/download
-[4]:  http://symfony.com/doc/2.3/quick_tour/the_big_picture.html
-[5]:  http://symfony.com/doc/2.3/index.html
-[6]:  http://symfony.com/doc/2.3/bundles/SensioFrameworkExtraBundle/index.html
-[7]:  http://symfony.com/doc/2.3/book/doctrine.html
-[8]:  http://symfony.com/doc/2.3/book/templating.html
-[9]:  http://symfony.com/doc/2.3/book/security.html
-[10]: http://symfony.com/doc/2.3/cookbook/email.html
-[11]: http://symfony.com/doc/2.3/cookbook/logging/monolog.html
-[12]: http://symfony.com/doc/2.3/cookbook/assetic/asset_management.html
-[13]: http://symfony.com/doc/2.3/bundles/SensioGeneratorBundle/index.html
