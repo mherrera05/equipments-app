@@ -39,13 +39,13 @@ Just miss to give permission to certain folders
     app/logs
 
 -----------------------------------
-**4) Access via http**
+**5) Access via http**
 
 If all were OK, you will get the login page
 ![login-page](web/images/login-page.png)
 
 -----------------------------------
-**5) First user**
+**6) First user**
 
 Sadly this app does not have fixtures to load and not even signup page, so to enter you have to create the first user directly on database.
 
